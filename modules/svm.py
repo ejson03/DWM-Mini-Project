@@ -3,7 +3,7 @@ from sklearn.svm import SVC
 import pandas as pd
 from utils import load_data
 from sklearn.model_selection import train_test_split
-
+from sklearn.metrics import classification_report
        
 def makeLine(xx, yy):
     leftPoint = {'x': xx[0], 'y': np.round(yy[0], 4)}
@@ -32,11 +32,13 @@ class svm:
         self.clf = None
         self.xtest = None
         self.ytest = None
+        self.labels = None
 
     def train(self, *args):
-        data = load_data()
-        X = df.iloc[:, :-1]
-        Y = df.iloc[:, -1]
+        df = load_data()
+        self.labels = df.columns.values.tolist()[:-1]
+        X = df.iloc[:, :-1].values
+        Y = df.iloc[:, -1].values
         xtrain, ytrain, self.xtest, self.ytest = train_test_split(X, Y, test_size=args[0], random_state=42)
         self.clf = SVC(kernel='linear', penalty=args[1], C=args[2])
 
@@ -48,6 +50,10 @@ class svm:
         }
 
     def test(self):
+        pred = self.clf.predict(self.xtest)
+        report = classification_report(self.ytest, pred, labels=self.labels, output_dict=True, target_names=self.labels)
+        return report
+
 
     def pointTest(self, data, eps=1e-3):
         x = np.array(data["x"], dtype='float')
@@ -83,7 +89,7 @@ class svm:
         leftPoint, rightPoint = makeLine(xx, yy)
         upperLeft, upperRight = makeLine(xx, yy_up)
         downLeft, downRight = makeLine(xx, yy_down)
-        colors = getColors(clf, xx, yy_up, yy_down)
+        colors = getColors(self.clf, xx, yy_up, yy_down)
         
         output_data = {
             "boundaryLine": [leftPoint, rightPoint],

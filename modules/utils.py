@@ -4,8 +4,7 @@ import yaml
 
 def load_data():
     if (session['file-type'] == 'csv'):
-        return pd.read_csv(session['file'], 
-                header=None, 
+        return pd.read_csv(session['file'],  
                  index_col=False)
     elif(session['file-type'] == 'json'):
         return pd.read_json(session['file'])
