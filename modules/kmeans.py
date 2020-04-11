@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.cluster import KMeans
 
-class svm:
+class kmeans:
     def __init__(self):
         self.clf = None
         self.xtest = None
@@ -9,19 +9,16 @@ class svm:
 
     def train(self, *args):
         data = load_data()
-        X = df.iloc[:, :-1]
-        Y = df.iloc[:, -1]
-        xtrain, ytrain, self.xtest, self.ytest = train_test_split(X, Y, test_size=args[0], random_state=42)
-        self.clf = SVC(kernel='linear', penalty=args[1], C=args[2])
+        X = data.iloc[:, args[0]:args[1]]
+        self.clf = KMeans(n_clusters=args[2], init='random',
+                    n_init=10, max_iter=300, 
+                    tol=1e-04, random_state=0)
 
-        self.clf.fit(xtrain, ytrain)
+        self.clf.fit(X)
         return {
-            'coef' : self.clf.coef_,
-            'intercept': self.clf.intercept_,
-            'classes': self.clf.classes_
+            'centers' : self.clf.cluster_centers_,
+            'labels': self.clf.labels_,
         }
-
-    def test(self):
 
     def pointTest(data):
     x = np.array(data["x"], dtype='float')
