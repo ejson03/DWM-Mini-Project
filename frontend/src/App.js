@@ -6,41 +6,35 @@ import { KMeans } from './components/kmeans/kmeans';
 import { LDA } from './components/lda/lda';
 import { NavBar } from './components/navbar/navbar';
 import { HomePage } from './components/home/homePage';
+import history from './components/history/history';
 import './App.css';
 
 
 export default class App extends Component {
     render() {
-        return ( <
-            BrowserRouter >
-            <
-            React.Fragment >
-            <
-            NavBar / >
-            <
-            div className = "main-content" >
-            <
-            Switch >
-            <
-            Route path = "/linear-regression"
-            component = { LinRegress }
-            />{" "} <
-            Route path = "/svm"
+        return ( <BrowserRouter history={history} >
+            <React.Fragment >
+            <NavBar / >
+            <div className = "main-content" >
+            <Switch >
+            <Route path = "/linear-regression"
+            component = { LinRegress }/>{" "} 
+            <Route path = "/svm"
             component = { SVM }
-            />{" "} <
-            Route path = "/k-means"
+            />{" "} 
+            <Route path = "/k-means"
             component = { KMeans }
-            />{" "} <
-            Route path = "/lda"
+            />{" "} 
+            <Route path = "/lda"
             component = { LDA }
-            />{" "} <
-            Route path = "/"
+            />{" "}
+             <Route path = "/"
             component = { HomePage }
-            />{" "} <
-            /Switch>{" "} <
-            /div>{" "} <
-            /React.Fragment>{" "} <
-            /BrowserRouter>
+            />{" "}
+             </Switch>{" "}
+              </div>{" "} 
+              </React.Fragment>{" "} 
+              </BrowserRouter>
         );
     }
 };

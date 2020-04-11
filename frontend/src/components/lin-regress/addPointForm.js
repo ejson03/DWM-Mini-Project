@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Form, Input, Button} from 'semantic-ui-react';
+import {Form, Input} from 'semantic-ui-react';
 import {PROXY_URL} from '../misc/proxyURL';
 import './addPointForm.css';
-
+import Button from '@material-ui/core/Button';
 function validNumber(str) {
     let trimmed = str.trim();
     return trimmed.length > 0 && isFinite(trimmed);
@@ -93,21 +93,21 @@ export class AddPointForm extends Component {
                             <span className="xy-form__row__span">{this.state.yStatus}</span>
                         </Form.Field>
                     </header>
-                    <Button primary
+                    <Button color ="inherit" >
                             className="add-point"
                             disabled={!(validNumber(this.state.x) && validNumber(this.state.y))}
                             onClick={async () => {
-                                this.state.onNewPoint({x: Number(this.state.x), y: Number(this.state.y)});
-                                this.setState({
-                                    x: '',
-                                    y: '',
+                                 this.state.onNewPoint({x: Number(this.state.x), y: Number(this.state.y)});
+                                 this.setState({
+                                     x: '',
+                                     y: '',
                                     xStatus: '',
                                     yStatus: ''
                                 });
-                            }
-                    }>
-                        Add Point
-                    </Button>
+                             }
+                     }>
+                         Add Point
+                     </Button>
                 </Form>
             </div>
         );

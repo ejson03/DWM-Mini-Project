@@ -10,11 +10,7 @@ export const HomePage = _ => {
                 Welcome to the Classical Machine Learning Visualizer!
             </Header>
             <p>
-                This is a React application that uses D3.js to visualize several 
-                classical machine learning algorithms. 
-                All visualizations are computed through a Flask backend server. 
-                Each page has a "Background" section (on the bottom) if you wish to learn 
-                more about the algorithm itself.
+                DWM MINI PROJECT 
             </p>
         </div>
     );
