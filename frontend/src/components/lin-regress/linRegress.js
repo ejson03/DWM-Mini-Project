@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
-import {Points} from './points'
-import {AddPointForm} from './addPointForm';
-import {LinRegressChart} from './linRegressChart';
-import {LinRegressBackground} from './linRegressBackground';
 import { Header } from 'semantic-ui-react';
 import './linRegress.css';
-
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 export class LinRegress extends Component {
     constructor() {
@@ -29,47 +26,35 @@ export class LinRegress extends Component {
                         size='huge'>
                     Linear Regression
                 </Header>
-                <div className="lin-regress">
-                    <AddPointForm 
-                        points={this.state.points}
-                        onNewPoint={
-                            point => this.setState({
-                                points: [...this.state.points, point]
-                            })
-                        }
-                        updateMetadata={
-                            newMetadata => this.setState({
-                                metadata: newMetadata,
-                                toggle: (this.state.toggle + 1) % 2
-                            })
-                        }
-                    />
-                    <Points 
-                        points={this.state.points}
-                        toggle={this.state.toggle}
-                        deletePoint={
-                            i => this.setState({
-                                    points: this.state.points.filter((_, idx) => i !== idx),
-                                    toggle: (this.state.toggle + 1) % 2
-                                })
-                        }
-                    />
-                    <LinRegressChart
-                        points={this.state.points}
-                        bestFitLine={this.state.metadata.bestFitLine}
-                    />
-                    <Header className='lin-regress__stats'
-                            size='small'
-                    >
-                        Slope of Line: {this.state.metadata.m}
-                        <br />
-                        Intercept: {this.state.metadata.b}
-                        <br />
-                        Total Residual: {this.state.metadata.residual}
-                    </Header>
-                </div>
-                <hr></hr>
-                <LinRegressBackground />
+                <Grid style={{ marginTop: '500px' }} container spacing={0}>
+                    <Grid item xs={3} style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'left'
+                    }}>
+                        <Button style={{ width: '40%' }} variant="contained" color="primary" >
+                            Train
+                        </Button>
+                    </Grid>
+                    <Grid item xs={3} style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center'
+                    }}>
+                        <Button style={{ width: '40%' }} variant="contained" color="primary" >
+                            Test 
+                        </Button>
+                    </Grid>
+                    <Grid item xs={3} style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-end'
+                    }}>
+                        <Button style={{ width: '40%' }} variant="contained" color="primary" >
+                            Result
+                        </Button>
+                    </Grid>
+        </Grid>
             </div>
         );
     }
