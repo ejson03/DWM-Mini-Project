@@ -14,9 +14,9 @@ export default class App extends Component {
     render() {
         return ( <BrowserRouter history={history} >
             <React.Fragment >
-            <NavBar / >
+            <NavBar/>
             <div className = "main-content" >
-            <Switch >
+            <Switch>
             <Route path = "/linear-regression"
             component = { LinRegress }/>{" "} 
             <Route path = "/svm"
