@@ -82,6 +82,7 @@ export const NavBar = _ => {
           </Typography>
         </Toolbar>
         <div>
+          <Button style={{ width: '8%' }} color="inherit"onClick={()=>{ pushLink('/')}}>Home</Button>
           <Button style={{ width: '8%' }} color="inherit"onClick={()=>{ pushLink('/linear-regression')}}>Linear</Button>
           <Button style={{ width: '8%' }} color="inherit"onClick={()=>{pushLink('/k-means')}}>K-Means</Button>
           <Button style={{ width: '8%' }} color="inherit"onClick={()=>{pushLink('/svm')}}>SVM</Button>

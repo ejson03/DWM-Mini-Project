@@ -9,6 +9,11 @@ export const HomePage = _ => {
             <Header size='huge'>
                 Welcome to the Classical Machine Learning Visualizer!
             </Header>
+            <br/>
+            <Header size='huge'>               
+                Upload the dataset (in csv, json or yaml) on which you would like to visualize the Machine Learning models.
+            </Header>
+            <br/>
             <Drag/>
         </div>
     );

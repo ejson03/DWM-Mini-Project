@@ -34,16 +34,16 @@ export default class Drag extends Component {
     render() {
         return (
             <div>
-                <div style={{ margin: '80px', marginTop: '100px', textAlign: 'center' }}>
+                <div style={{ textAlign: 'center' }}>
                 <Button variant="contained" color="primary"onClick={this.handleOpen.bind(this)}>
-                    Upload File 
+                    Upload Dataset
                 </Button>
                 </div>
                 
                 <DropzoneDialog
                     open={this.state.open}
                     onSave={this.handleSave.bind(this)}
-                    acceptedFiles={['.csv']}
+                    acceptedFiles={['.csv', '.json', '.yml']}
                     showPreviews={true}
                     cancelButtonText={"cancel"}
                     submitButtonText={"submit"}
