@@ -2,7 +2,7 @@ from modules.lin_regress import linRegression
 from modules.svm import svm
 from modules.kmeans import kmeans
 from modules.lda import lda
-from flask import Flask, request, jsonify, render_template, abort
+from flask import Flask, request, jsonify, render_template, abort, session
 from flask_cors import CORS
 import os.path
 
@@ -35,7 +35,7 @@ def upload():
         ext = data.filename.split('.')[1]
         if(ext in exts):
             data.save('uploads/' + data.filename)
-            session['file'] = f'uploads/{data}'
+            session['file'] = f'uploads/{data.filename}'
             session['file-type'] = ext
             return jsonify({'response': 'File uploaded success!'})
         else:

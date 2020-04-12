@@ -10,13 +10,12 @@ class kmeans:
 
     def train(self, *args):
         data = load_data()
-        X = data.iloc[:, args[0]:args[1]]
-        self.k = args[2]
+        self.k = args[0]
         self.clf = KMeans(n_clusters=args[2], init='random',
                     n_init=10, max_iter=300, 
                     tol=1e-04, random_state=0)
 
-        self.clf.fit(X)
+        self.clf.fit(data)
         return {
             'centers' : self.clf.cluster_centers_,
             'labels': self.clf.labels_,

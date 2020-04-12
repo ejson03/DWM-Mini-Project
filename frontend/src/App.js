@@ -5,10 +5,9 @@ import { SVM } from './components/svm/svm';
 import { KMeans } from './components/kmeans/kmeans';
 import { LDA } from './components/lda/lda';
 import { NavBar } from './components/navbar/navbar';
-import { HomePage } from './components/home/homePage';
+import HomePage from './components/home/homePage';
 import history from './components/history/history';
 import './App.css';
-
 
 export default class App extends Component {
     render() {
@@ -31,10 +30,10 @@ export default class App extends Component {
              <Route path = "/"
             component = { HomePage }
             />{" "}
-             </Switch>{" "}
-              </div>{" "} 
-              </React.Fragment>{" "} 
-              </BrowserRouter>
+            </Switch>{" "}
+            </div>{" "} 
+            </React.Fragment>{" "} 
+            </BrowserRouter>
         );
     }
 };
