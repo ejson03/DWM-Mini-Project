@@ -4,12 +4,12 @@ from sklearn.cluster import KMeans
 class kmeans:
     def __init__(self):
         self.clf = None
-        self.xtest = None
-        self.ytest = None
+        self.k = None
 
     def train(self, *args):
         data = load_data()
         X = data.iloc[:, args[0]:args[1]]
+        self.k = args[2]
         self.clf = KMeans(n_clusters=args[2], init='random',
                     n_init=10, max_iter=300, 
                     tol=1e-04, random_state=0)
@@ -30,10 +30,9 @@ class kmeans:
             'points': []
         }
 
-    k = int(data['k'])
     D = np.array([x, y]).T
-    k = min(k, D.shape[0])
-    clf = KMeans(n_clusters=k).fit(D)
+    k = min(self.k, D.shape[0])
+    clf = self.clf.fit(D)
     labels, centroids = clf.labels_, clf.cluster_centers_
     
     output_data = {

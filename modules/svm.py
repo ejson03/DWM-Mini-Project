@@ -1,7 +1,7 @@
 import numpy as np
-from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
 import pandas as pd
-from utils import load_data
+from utils import load_data, clean
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
        
@@ -36,11 +36,15 @@ class svm:
 
     def train(self, *args):
         df = load_data()
+        df.reset_index(drop=True, inplace=True)
+        print(df.shape)
         self.labels = df.columns.values.tolist()[:-1]
-        X = df.iloc[:, :-1].values
-        Y = df.iloc[:, -1].values
+        df = clean(df.iloc[:, :-1])
+        print(df.shape)
+        X = df.iloc[1:, :-1]
+        Y = df.iloc[1:, -1]
         xtrain, ytrain, self.xtest, self.ytest = train_test_split(X, Y, test_size=args[0], random_state=42)
-        self.clf = SVC(kernel='linear', penalty=args[1], C=args[2])
+        self.clf = LinearSVC(penalty=args[1], C=args[2])
 
         self.clf.fit(xtrain, ytrain)
         return {
@@ -100,6 +104,14 @@ class svm:
         }
 
         return output_data
+
+if __name__ == "__main__":
+    svm = svm()
+    train = svm.train(0.25, 'l1', 0.80)
+    print(train)
+   
+
+    
 
 
 
