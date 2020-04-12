@@ -9,18 +9,18 @@ import os.path
 app = Flask(__name__)
 app.secret_key = "abc"
 
-services = {
+algos = {
     'svm': svm,
-    'lin_regress': linRegression,
+    'lr': linRegression,
     'kmeans': kmeans,
     'lda': lda
 }
-
-
+services = ['train', 'test', 'pointtest']
 
 cors = CORS(app, resources={
-    r'/{}'.format(service): {"origins": "*"} for service in services
+    r'/{}/{}'.format(service,algo): {"origins": "*"} for service in services for algo in algos 
 }, expose_headers='Authorization')
+
 
 @app.route('/', methods=['GET'])
 def test():
@@ -44,7 +44,7 @@ def upload():
 @app.route('/train/<string:train_name>', methods=['POST'])
 def train(train_name):
     try:
-        service_class = services[train_name]
+        service_class = algos[train_name]
     except:
         # service does not exist
         return None, 401
@@ -57,7 +57,7 @@ def train(train_name):
 @app.route('/test/<string:test_name>', methods=['POST'])
 def testroute(test_name):
     try:
-        service_class = services[test_name]
+        service_class = algos[test_name]
     except:
         # service does not exist
         return None, 401
@@ -67,10 +67,10 @@ def testroute(test_name):
     return jsonify(test)
 
 
-@app.route('/pointtest//<string:point_name>', methods=['POST'])
+@app.route('/pointtest/<string:point_name>', methods=['POST'])
 def pointtest(point_name):
     try:
-        service_func = services[point_name]
+        service_func = algos[point_name]
     except:
         # service does not exist
         return None, 401

@@ -1,4 +1,6 @@
 import numpy as np
+from .utils import load_data, clean, one_hot_encode
+
 
 def linRegression(data):
     if len(data['x']) == 0:

@@ -1,5 +1,7 @@
 import numpy as np
 from sklearn.cluster import KMeans
+from .utils import load_data
+
 
 class kmeans:
     def __init__(self):

@@ -1,5 +1,7 @@
 import numpy as np
 from numpy.linalg import eig, pinv, norm
+from .utils import load_data, clean, one_hot_encode
+
 
 def getGaussianData(m, C, n=1000):
     x = np.random.multivariate_normal(m, C, n)
