@@ -20,7 +20,7 @@ ml = {
 
 cors = CORS(app, resources={
     r'/{}'.format(service): {"origins": "*"} for service in services
-})
+}, expose_headers='Authorization')
 
 @app.route('/', methods=['GET'])
 def test():
@@ -31,7 +31,7 @@ exts = ['csv', 'json', 'yaml']
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-        data = request.files['data']
+        data = request.files['file']
         ext = data.filename.split('.')[1]
         if(ext in exts):
             data.save('uploads/' + data.filename)

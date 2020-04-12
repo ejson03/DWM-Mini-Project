@@ -7,14 +7,14 @@ import numpy as np
 from scipy import stats
 
 def load_data():
-    # if (session['file-type'] == 'csv'):
-    return pd.read_csv( '../uploads/data.csv' ,                       #session['file'],  
+    if (session['file-type'] == 'csv'):
+        return pd.read_csv(session['file'],  
                  index_col=0)
-    # elif(session['file-type'] == 'json'):
-    #     return pd.read_json(session['file'])
-    # else:
-    #     with open(session['file'], 'r') as f:
-    #         return json_normalize(yaml.load(f))
+    elif(session['file-type'] == 'json'):
+        return pd.read_json(session['file'])
+    else:
+        with open(session['file'], 'r') as f:
+            return json_normalize(yaml.load(f))
 
 
 def one_hot_encode(data):
