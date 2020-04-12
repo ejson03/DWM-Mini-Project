@@ -1,12 +1,7 @@
 import React from 'react';
 import {Header} from 'semantic-ui-react';
 import './homePage.css';
-
-var componentConfig = {
-    iconFiletypes: ['.json', '.csv', '.yaml'],
-    showFiletypeIcon: true,
-    postUrl: '/uploadHandler'
-};
+import Drag from './../Drag';
 
 export const HomePage = _ => {
     return (
@@ -14,6 +9,7 @@ export const HomePage = _ => {
             <Header size='huge'>
                 Welcome to the Classical Machine Learning Visualizer!
             </Header>
+            <Drag/>
         </div>
     );
 }
