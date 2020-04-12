@@ -21,24 +21,24 @@ class kmeans:
         }
 
     def pointTest(data):
-    x = np.array(data["x"], dtype='float')
-    y = np.array(data["y"], dtype='float')
+        x = np.array(data["x"], dtype='float')
+        y = np.array(data["y"], dtype='float')
 
-    if len(x) == 0:
-        return {
-            'centroids': [],
-            'points': []
+        if len(x) == 0:
+            return {
+                'centroids': [],
+                'points': []
+            }
+
+        D = np.array([x, y]).T
+        k = min(self.k, D.shape[0])
+        clf = self.clf.fit(D)
+        labels, centroids = clf.labels_, clf.cluster_centers_
+        
+        output_data = {
+            'centroids': [{'x': centroids[i, 0], 'y': centroids[i, 1], 'label': i} for i in range(len(centroids))],
+            'points': [{'x': D[i, 0], 'y': D[i, 1], 'label': int(labels[i])} for i in range(len(labels))]
         }
 
-    D = np.array([x, y]).T
-    k = min(self.k, D.shape[0])
-    clf = self.clf.fit(D)
-    labels, centroids = clf.labels_, clf.cluster_centers_
-    
-    output_data = {
-        'centroids': [{'x': centroids[i, 0], 'y': centroids[i, 1], 'label': i} for i in range(len(centroids))],
-        'points': [{'x': D[i, 0], 'y': D[i, 1], 'label': int(labels[i])} for i in range(len(labels))]
-    }
-
-    return output_data
+        return output_data
 

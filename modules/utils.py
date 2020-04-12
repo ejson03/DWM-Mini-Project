@@ -9,9 +9,9 @@ from scipy import stats
 def load_data():
     if (session['file-type'] == 'csv'):
         return pd.read_csv(session['file'],  
-                 index_col=0)
+                 index_col=0, parse_dates=True)
     elif(session['file-type'] == 'json'):
-        return pd.read_json(session['file'])
+        return pd.read_json(session['file'], parse_dates=True)
     else:
         with open(session['file'], 'r') as f:
             return json_normalize(yaml.load(f))
@@ -20,10 +20,9 @@ def load_data():
 def one_hot_encode(data):
     return get_dummies(data)
 
-def drop_missing_data(real, discrete):
-    real =  real[~real.isin([np.nan, np.inf, -np.inf]).any(1)]
-    discrete =  discrete[~discrete.isin([np.nan, np.inf, -np.inf]).any(1)]
-    return real, discrete
+def drop_missing_data(df):
+    df =  df[~df.isin([np.nan, np.inf, -np.inf]).any(1)]
+    return df
 
 def interpolate_missing_data(real, discrete):
     mode = discrete.mode().values.flatten()
@@ -42,19 +41,22 @@ def interpolate_missing_data(real, discrete):
     discrete = discrete.fillna(Series(dis_rep))
     return real, discrete
 
-def remove_outliers(real, discrete):
+def remove_outliers(real, discrete, output):
     df = pd.concat([real, discrete], axis=1)
     constrains = df.select_dtypes(exclude=['object']) \
         .apply(lambda x: np.abs(stats.zscore(x)) < 3) \
         .all(axis=1)
+    df = pd.concat([df, output], axis=1)
     df.drop(df.index[~constrains], inplace=True)
     return df
 
 def clean(df):
-    print(type(df['Date'][0]))
-    real = df.select_dtypes(exclude=['object', 'datetimetz'])
-    discrete = df.select_dtypes(include=['object'])
-    real, discrete = drop_missing_data(real, discrete)
+    df = drop_missing_data(df)
+    output = df.iloc[:, -1]
+    params = df.iloc[:, :-1]
+    real = params.select_dtypes(exclude=['object', 'datetimetz'])
+    discrete = params.select_dtypes(include=['object'])
     #real, discrete = interpolate_missing_data(real, discrete)
-    df = remove_outliers(real, discrete)
+    # df = pd.concat([real, discrete, output], axis=1)
+    df = remove_outliers(real, discrete, output)
     return df

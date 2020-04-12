@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.svm import LinearSVC
 import pandas as pd
-from utils import load_data, clean, one_hot_encode
+from .utils import load_data, clean, one_hot_encode
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
        

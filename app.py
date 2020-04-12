@@ -9,7 +9,7 @@ import os.path
 app = Flask(__name__)
 app.secret_key = "abc"
 
-ml = {
+services = {
     'svm': svm,
     'lin_regress': linRegression,
     'kmeans': kmeans,
@@ -41,10 +41,10 @@ def upload():
         else:
             abort(404)
 
-@app.route('/train/<string:service_name>', methods=['POST'])
-def service(service_name):
+@app.route('/train/<string:train_name>', methods=['POST'])
+def train(train_name):
     try:
-        service_class = services[service_name]
+        service_class = services[train_name]
     except:
         # service does not exist
         return None, 401
@@ -54,10 +54,10 @@ def service(service_name):
     train = algo.train(params)
     return jsonify(train)
 
-@app.route('/test/<string:service_name>', methods=['POST'])
-def service(service_name):
+@app.route('/test/<string:test_name>', methods=['POST'])
+def testroute(test_name):
     try:
-        service_class = services[service_name]
+        service_class = services[test_name]
     except:
         # service does not exist
         return None, 401
@@ -67,10 +67,10 @@ def service(service_name):
     return jsonify(test)
 
 
-@app.route('/pointtest//<string:service_name>', methods=['POST'])
-def service(service_name):
+@app.route('/pointtest//<string:point_name>', methods=['POST'])
+def pointtest(point_name):
     try:
-        service_func = services[service_name]
+        service_func = services[point_name]
     except:
         # service does not exist
         return None, 401
