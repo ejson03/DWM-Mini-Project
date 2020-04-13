@@ -1,11 +1,9 @@
 import React from 'react';
 import {Header} from 'semantic-ui-react';
 import Button from "@material-ui/core/Button";
-import './homePage.css';
 import {PROXY_URL} from '../misc/proxyURL';
+import './homePage.css';
 
-const axios = require('axios').default;
-  
 class HomePage extends React.Component {
     constructor(props) {
         super(props);
