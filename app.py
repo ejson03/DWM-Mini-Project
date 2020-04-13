@@ -10,6 +10,8 @@ import json
 app = Flask(__name__)
 app.secret_key = "abc"
 
+file_det = {}
+
 algos = {
     'svm': svm,
     'lr': lin_regress,
@@ -36,9 +38,8 @@ def upload():
         ext = data.filename.split('.')[1]
         if(ext in exts):
             data.save('uploads/' + data.filename)
-            session['file'] = f'uploads/{data.filename}'
-            session['filetype'] = ext
-            print(session)
+            file_det['path'] = f'uploads/{data.filename}'
+            file_det['type'] = ext
             return jsonify({'response': 'File uploaded success!'})
         else:
             abort(404)
@@ -53,14 +54,15 @@ def train(train_name):
     
     params = request.get_json()
     algo = service_class()
-    train = algo.train('./uploads/Sample.csv', 'csv',params)
+    print(file_det)
+    train = algo.train(file_det['path'], file_det['type'],params)
     print(train)
-    response = app.response_class(
-        response=json.dumps(train),
-        status=200,
-        mimetype='application/json'
-    )
-    return response
+    # response = app.response_class(
+    #     response=json.dumps(train),
+    #     status=200,
+    #     mimetype='application/json'
+    # )
+    return train
 
 @app.route('/test/<string:test_name>', methods=['POST'])
 def testroute(test_name):

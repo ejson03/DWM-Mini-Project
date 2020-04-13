@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.cluster import KMeans
 from .utils import load_data
-
+import json
 
 class kmeans:
     def __init__(self):
@@ -18,8 +18,8 @@ class kmeans:
 
         self.clf.fit(df)
         return {
-            'centers' : self.clf.cluster_centers_,
-            'labels': self.clf.labels_,
+            'centers' : json.dumps(self.clf.cluster_centers_.tolist()),
+            'labels': json.dumps(self.clf.labels_.tolist()),
         }
 
     def pointTest(data):

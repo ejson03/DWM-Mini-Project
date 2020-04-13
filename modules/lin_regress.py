@@ -2,6 +2,7 @@ import numpy as np
 from .utils import load_data, clean, one_hot_encode
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
+import json
 
 class lin_regress:
     def __init__(self):
@@ -20,8 +21,8 @@ class lin_regress:
         clf = LinearRegression()
         clf.fit(xtrain, ytrain)
         return {
-            'intercept' : self.clf.intercept_,
-            'coef': self.clf.coef_,
+            'intercept' : json.dumps(self.clf.intercept_.tolist()),
+            'coef': json.dumps(self.clf.coef_.tolist()),
         }
 
     def test(self):

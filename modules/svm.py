@@ -4,7 +4,7 @@ import pandas as pd
 from .utils import load_data, clean, one_hot_encode, label_encoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-
+import json
        
 def makeLine(xx, yy):
     leftPoint = {'x': xx[0], 'y': np.round(yy[0], 4)}
@@ -47,8 +47,9 @@ class svm:
         self.clf = LinearSVC(penalty=params[1], C=float(params[2]))
         self.clf.fit(xtrain, ytrain)
         return {
-            'intercept': list(self.clf.intercept_),
-            'classes': list(self.clf.classes_)
+            'coef': json.dumps(self.clf.coef_.tolist()),
+            'intercept': json.dumps(self.clf.intercept_.tolist()),
+            'classes': json.dumps(self.clf.classes_.tolist())
         }
 
     def test(self):

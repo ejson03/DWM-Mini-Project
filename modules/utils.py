@@ -9,7 +9,7 @@ from flask import session
 from sklearn.preprocessing import LabelEncoder
 
 def load_data(filepath, fileext):
-
+    
     if (fileext == 'csv'):
         return pd.read_csv(filepath,  
                  index_col=0, parse_dates=True)
