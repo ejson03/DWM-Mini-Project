@@ -13,16 +13,6 @@ import TextField from "@material-ui/core/TextField";
 import {PROXY_URL} from '../misc/proxyURL';
 import './svm.css';
 
-const useStyles = makeStyles(theme => ({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2)
-    }
-  }));
-  
 export class SVM extends Component {
     constructor() {
         super();
@@ -47,14 +37,13 @@ export class SVM extends Component {
         const data = new FormData();
         data.append('file', this.uploadInput.files[0]);
     
-        fetch(PROXY_URL + '/upload', {
+        fetch(PROXY_URL + '/train/svm', {
           method: 'POST',
           body: data,
         });
     }
 
     TrainForm() {
-        const classes = useStyles();
         const [penalty, setPenalty] = React.useState("");
     
         const handleChange = event => {
@@ -63,8 +52,8 @@ export class SVM extends Component {
     
         return (
             <div>
-                <FormControl variant="outlined" className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-outlined-label">Penalty</InputLabel>
+                <FormControl variant="outlined">
+                    <InputLabel id="penalty-label">Penalty</InputLabel>
                     <Select
                         labelId="penalty-label"
                         id="penalty"
