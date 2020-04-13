@@ -1,16 +1,14 @@
 import React, {Component} from 'react';
 import {List, Button, Icon} from 'semantic-ui-react';
-import {InlineMath} from 'react-katex';
-import './gaussians.css';
+import './points.css';
 
-export class Gaussians extends Component {
+export class Points extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            means: this.props.means,
-            covMats: this.props.covMats,
+            points: this.props.points,
             toggle: this.props.toggle,
-            deletePair: this.props.deletePair
+            deletePoint: this.props.deletePoint
         };
     };
 
@@ -22,25 +20,20 @@ export class Gaussians extends Component {
 
     render() {
         return (
-            <div className="lda__points">
-                <h2><u>Gaussian Classes</u>:</h2>
-                <div className="lda__points-list">
+            <div className="lin-regress__points">
+                <h2><u>Points</u>:</h2>
+                <div className="lin-regress__points-list">
                     <List>
-                    {this.state.means.map((meanVec, i) => {
+                    {this.state.points.map((point, i) => {
                         return (
                             <List.Item key={i}>
                                 <header className='point-row'>
                                     <span className='point-row__point'>
-                                    (   <InlineMath math='\mu_X = ' /> &nbsp; {meanVec[0]}, &nbsp;
-                                        <InlineMath math='\mu_Y = ' /> &nbsp; {meanVec[1]},  &nbsp;
-                                        <InlineMath math='\sigma_X^2 = ' /> &nbsp; {this.state.covMats[i][0][0]}, &nbsp;
-                                        <InlineMath math='\sigma_Y^2 = ' /> &nbsp; {this.state.covMats[i][1][1]},  &nbsp;
-                                        <InlineMath math='\sigma_{XY} = ' /> &nbsp; {this.state.covMats[i][0][1]}
-                                    )
+                                        ({point.x}, {point.y})
                                     </span>
                                     <Button className='point-row__delete'
                                         onClick={_ => {
-                                            this.state.deletePair(i);
+                                            this.state.deletePoint(i);
                                         }
                                     }>
                                         <Icon name='close' />

@@ -1,19 +1,13 @@
-.lda-form__row {
+.xy-form__row {
     display: flex;
     padding-bottom: 10px;
 }
 
-.lda-form__row__input {
-    flex: 0.5;
+.xy-form__row__input {
+    width: 115px !important;
 }
 
-.lda-form__row__sym {
-    flex: 0.20;
-    text-align: right;
-    margin-right: 20px;
-}
-
-.lda-form__row__span {
+.xy-form__row__span {
     color: red;
     font-size: 1.1em;
     margin-left: 10px;
@@ -22,5 +16,4 @@
     -webkit-align-items: center;
     align-items: center;
     justify-content: center;
-    flex: 1;
 }

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
+import {Gaussians} from './gaussians'
+import {AddGaussianForm} from './addGaussianForm';
+import {LDAChart} from './ldaChart';
 import { Header } from 'semantic-ui-react';
 import './lda.css';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 
 export class LDA extends Component {
     constructor() {
@@ -26,35 +27,40 @@ export class LDA extends Component {
                 >
                     Linear Discriminant Analysis
                 </Header>
-                <Grid style={{ marginTop: '500px' }} container spacing={0}>
-                    <Grid item xs={3} style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'left'
-                    }}>
-                        <Button style={{ width: '40%' }} variant="contained" color="primary" >
-                            Train
-                        </Button>
-                    </Grid>
-                    <Grid item xs={3} style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center'
-                    }}>
-                        <Button style={{ width: '40%' }} variant="contained" color="primary" >
-                            Test 
-                        </Button>
-                    </Grid>
-                    <Grid item xs={3} style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'flex-end'
-                    }}>
-                        <Button style={{ width: '40%' }} variant="contained" color="primary" >
-                            Result
-                        </Button>
-                    </Grid>
-                </Grid>
+                <div className="lda">
+                    <AddGaussianForm 
+                        means={this.state.means}
+                        covarianceMatrices={this.state.covarianceMatrices}
+                        onNewInput={
+                            (meanVector, covMat) => this.setState({
+                                means: [...this.state.means, meanVector],
+                                covarianceMatrices: [...this.state.covarianceMatrices, covMat]
+                            })
+                        }
+                        updateMetadata={
+                            newMetadata => this.setState({
+                                metadata: newMetadata,
+                                toggle: (this.state.toggle + 1) % 2
+                            })
+                        }
+                    />
+                    <Gaussians 
+                        means={this.state.means}
+                        covMats={this.state.covarianceMatrices}
+                        toggle={this.state.toggle}
+                        deletePair={
+                            i => this.setState({
+                                    means: this.state.means.filter((_, idx) => i !== idx),
+                                    covarianceMatrices: this.state.covarianceMatrices.filter((_, idx) => i !== idx),
+                                    toggle: (this.state.toggle + 1) % 2
+                                })
+                        }
+                    />
+                    <LDAChart 
+                        points={this.state.metadata.points}
+                        line={this.state.metadata.line}
+                    />
+                </div>
             </div>
         );
     }

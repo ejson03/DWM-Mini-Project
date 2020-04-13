@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { LinRegress } from './components/lin-regress/linRegress';
+import { LinReg } from './components/lin-reg/linReg';
 import { SVM } from './components/svm/svm';
 import { KMeans } from './components/kmeans/kmeans';
 import { LDA } from './components/lda/lda';
@@ -17,7 +17,7 @@ export default class App extends Component {
             <div className = "main-content" >
             <Switch>
             <Route path = "/linear-regression"
-            component = { LinRegress }/>{" "} 
+            component = { LinReg }/>{" "} 
             <Route path = "/svm"
             component = { SVM }
             />{" "} 
@@ -27,7 +27,7 @@ export default class App extends Component {
             <Route path = "/lda"
             component = { LDA }
             />{" "}
-             <Route path = "/"
+            <Route path = "/"
             component = { HomePage }
             />{" "}
             </Switch>{" "}
