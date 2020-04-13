@@ -8,3 +8,6 @@ itsdangerous
 Jinja2
 MarkupSafe
 pyyaml
+click
+six
+Werkzeug

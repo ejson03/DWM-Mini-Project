@@ -1,4 +1,4 @@
-from modules.lin_regress import linRegression
+from modules.lin_regress import lin_regress
 from modules.svm import svm
 from modules.kmeans import kmeans
 from modules.lda import lda
@@ -11,7 +11,7 @@ app.secret_key = "abc"
 
 algos = {
     'svm': svm,
-    'lr': linRegression,
+    'lr': lin_regress,
     'kmeans': kmeans,
     'lda': lda
 }

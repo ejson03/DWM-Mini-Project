@@ -34,12 +34,12 @@ class lin_regress:
 
     def pointTest(data):
         if len(data['x']) == 0:
-        return {
-            "pts": [{"x": 0, "y": 0}, {"x": 0, "y": 0}],
-            "m": 0,
-            "b": 0,
-            "residual": 0
-        }
+            return {
+                "pts": [{"x": 0, "y": 0}, {"x": 0, "y": 0}],
+                "m": 0,
+                "b": 0,
+                "residual": 0
+            }
 
         x_ = np.array(data["x"], dtype='float')
         y = np.array(data["y"], dtype='float')
