@@ -4,11 +4,12 @@ import {SVMSlider} from './svmSlider';
 import { Header } from 'semantic-ui-react';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from "@material-ui/core/styles";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import InputLabel from "@material-ui/core/InputLabel";
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
 import TextField from "@material-ui/core/TextField";
 import {PROXY_URL} from '../misc/proxyURL';
 import './svm.css';
@@ -28,43 +29,52 @@ export class SVM extends Component {
             },
             toggle: 0
         };
-        this.upload = this.upload.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     };
 
-    upload(ev) {
-        ev.preventDefault();
-    
-        const data = new FormData();
-        data.append('file', this.uploadInput.files[0]);
-    
+    handleSubmit(event) {
+        event.preventDefault();
+        
+        const data = new FormData(event.target);
+        
         fetch(PROXY_URL + '/train/svm', {
           method: 'POST',
           body: data,
         });
     }
 
-    TrainForm() {
-        const [penalty, setPenalty] = React.useState("");
-    
-        const handleChange = event => {
-            setPenalty(event.target.value);
+    Penalty() {
+        const [value, setValue] = React.useState('female');
+      
+        const handleChange = (event) => {
+          setValue(event.target.value);
         };
-    
+        
+        return (
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Penalty</FormLabel>
+            <RadioGroup aria-label="Penalty" name="Penalty" value={value} onChange={handleChange}>
+              <FormControlLabel value="l1" control={<Radio />} label="L1" />
+              <FormControlLabel value="l2" control={<Radio />} label="L2" />
+            </RadioGroup>
+          </FormControl>
+        );
+      }
+
+    render() {
         return (
             <div>
-                <FormControl variant="outlined">
-                    <InputLabel id="penalty-label">Penalty</InputLabel>
-                    <Select
-                        labelId="penalty-label"
-                        id="penalty"
-                        value={penalty}
-                        onChange={handleChange}
-                        label="Penalty"
-                        required
-                    >
-                        <MenuItem default value={"l1"}>L1</MenuItem>
-                        <MenuItem value={"l2"}>L2</MenuItem>
-                    </Select>
+                <Header className='title'
+                        size='huge'>
+                    Support Vector Machine
+                </Header> 
+                <Grid style={{ marginTop: '500px' }} container spacing={0}>
+                <Grid item xs={3} style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'left'
+                }}>
+                    <this.Penalty/>
                     <br />
                     <TextField
                         id="test-split"
@@ -90,26 +100,7 @@ export class SVM extends Component {
                         required
                     />
                     <br />
-                    <Button type="submit" variant="contained" color="primary" align="auto">Train</Button>
-                </FormControl>
-            </div>
-            );
-        }
-
-    render() {
-        return (
-            <div>
-                <Header className='title'
-                        size='huge'>
-                    Support Vector Machine
-                </Header> 
-                <Grid style={{ marginTop: '500px' }} container spacing={0}>
-                <Grid item xs={3} style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'left'
-                }}>
-                    <this.TrainForm/>    
+                    <Button type="submit" variant="contained" color="primary" align="auto">Train</Button>   
                 </Grid>
                 <Grid item xs={3} style={{
                     display: 'flex',
