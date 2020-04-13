@@ -36,7 +36,7 @@ def upload():
         if(ext in exts):
             data.save('uploads/' + data.filename)
             session['file'] = f'uploads/{data.filename}'
-            session['file-type'] = ext
+            session['filetype'] = ext
             return jsonify({'response': 'File uploaded success!'})
         else:
             abort(404)
@@ -51,7 +51,7 @@ def train(train_name):
     
     params = request.get_json()
     algo = service_class()
-    train = algo.train(params)
+    train = algo.train(session['file'], session['filetype'],params)
     return jsonify(train)
 
 @app.route('/test/<string:test_name>', methods=['POST'])

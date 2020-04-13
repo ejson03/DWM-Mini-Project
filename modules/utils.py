@@ -5,20 +5,27 @@ from pandas import get_dummies, Series
 import yaml 
 import numpy as np 
 from scipy import stats
+from flask import session
+from sklearn.preprocessing import LabelEncoder
 
-def load_data():
-    if (session['file-type'] == 'csv'):
-        return pd.read_csv(session['file'],  
+def load_data(filepath, fileext):
+
+    if (fileext == 'csv'):
+        return pd.read_csv(filepath,  
                  index_col=0, parse_dates=True)
-    elif(session['file-type'] == 'json'):
-        return pd.read_json(session['file'], parse_dates=True)
+    elif(fileext == 'json'):
+        return pd.read_json(filepath, parse_dates=True)
     else:
-        with open(session['file'], 'r') as f:
+        with open(filepath, 'r') as f:
             return json_normalize(yaml.load(f))
 
 
 def one_hot_encode(data):
     return get_dummies(data)
+
+def label_encoder(data):
+    df = data.apply(LabelEncoder().fit_transform)
+    return df
 
 def drop_missing_data(df):
     df =  df[~df.isin([np.nan, np.inf, -np.inf]).any(1)]
@@ -28,7 +35,7 @@ def interpolate_missing_data(real, discrete):
     mode = discrete.mode().values.flatten()
     mean = real.mean().values.flatten()
     real_rep = list(zeros(len(real.columns)))
-    dis_rep = list(zeros(len(real.columns)))
+    dis_rep = list(zeros(len(discrete.columns)))
     j = 0
     for index in len(real_rep):
         real_rep[index] = mean[j]
@@ -42,21 +49,25 @@ def interpolate_missing_data(real, discrete):
     return real, discrete
 
 def remove_outliers(real, discrete, output):
-    df = pd.concat([real, discrete], axis=1)
-    constrains = df.select_dtypes(exclude=['object']) \
-        .apply(lambda x: np.abs(stats.zscore(x)) < 3) \
-        .all(axis=1)
-    df = pd.concat([df, output], axis=1)
-    df.drop(df.index[~constrains], inplace=True)
-    return df
+    con = real[(np.abs(stats.zscore(real)) < 3).all(axis=1)]
+    # constrains = df[df.select_dtypes(exclude=['object']) \
+    #     .apply(lambda x: np.abs(stats.zscore(x)) < 3 ) \
+    #     .all(axis=1)
+    print(con.head())
+    df = pd.concat([real, discrete, output], axis=1)
+    print(df.shape)
+    # df.drop(df.index[constrains], inplace=True)
+    # print(df.shape)
+    # return df
 
 def clean(df):
-    df = drop_missing_data(df)
+    df = drop_missing_data(df)  
     output = df.iloc[:, -1]
     params = df.iloc[:, :-1]
     real = params.select_dtypes(exclude=['object', 'datetimetz'])
     discrete = params.select_dtypes(include=['object'])
+    discrete = label_encoder(discrete)
     #real, discrete = interpolate_missing_data(real, discrete)
-    # df = pd.concat([real, discrete, output], axis=1)
-    df = remove_outliers(real, discrete, output)
+    df = pd.concat([real, discrete, output], axis=1)
+    #df = remove_outliers(real, discrete, output)
     return df

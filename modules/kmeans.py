@@ -9,13 +9,14 @@ class kmeans:
         self.k = None
 
     def train(self, *args):
-        data = load_data()
+        df = load_data(filepath, fileext)
+        df.reset_index(drop=True, inplace=True)
         self.k = args[0]
         self.clf = KMeans(n_clusters=args[2], init='random',
                     n_init=10, max_iter=300, 
                     tol=1e-04, random_state=0)
 
-        self.clf.fit(data)
+        self.clf.fit(df)
         return {
             'centers' : self.clf.cluster_centers_,
             'labels': self.clf.labels_,

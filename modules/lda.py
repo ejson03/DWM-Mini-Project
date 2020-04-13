@@ -1,7 +1,5 @@
 import numpy as np
 from numpy.linalg import eig, pinv, norm
-from .utils import load_data, clean, one_hot_encode
-
 
 def getGaussianData(m, C, n=1000):
     x = np.random.multivariate_normal(m, C, n)
@@ -44,36 +42,38 @@ def computeDiscriminant(means, covarianceMatrices):
     w = U[:, 0]
     return w
 
-def lda(data):
-    means = data["means"]
-    means = [np.array(meanVec).astype(np.float64) for meanVec in means]
-    covMats = data["covarianceMatrices"]
-    covMats = [np.array(covMat).astype(np.float64) for covMat in covMats]
+class lda:
 
-    if len(means) != len(covMats) or len(means) == 0:
-        return {
-            'points': [],
-            'line': []
+    def pointtest(data):
+        means = data["means"]
+        means = [np.array(meanVec).astype(np.float64) for meanVec in means]
+        covMats = data["covarianceMatrices"]
+        covMats = [np.array(covMat).astype(np.float64) for covMat in covMats]
+
+        if len(means) != len(covMats) or len(means) == 0:
+            return {
+                'points': [],
+                'line': []
+            }
+
+        points = []
+        for label, pair in enumerate(zip(means, covMats)):
+            m, C = pair
+            pts = getGaussianData(m, C, n=100)
+            for idx in range(pts.shape[0]):
+                points.append({
+                    'x': pts[idx, 0],
+                    'y': pts[idx, 1],
+                    'label': label
+                })
+        
+        w = computeDiscriminant(means, covMats)
+        line = getLine(means, w, T=5, N=2)
+        line = [{'x': line[0, i], 'y': line[1, i]} for i in range(line.shape[1])]
+
+        output_data = {
+                'points': points,
+                'line': line
         }
 
-    points = []
-    for label, pair in enumerate(zip(means, covMats)):
-        m, C = pair
-        pts = getGaussianData(m, C, n=100)
-        for idx in range(pts.shape[0]):
-            points.append({
-                'x': pts[idx, 0],
-                'y': pts[idx, 1],
-                'label': label
-            })
-    
-    w = computeDiscriminant(means, covMats)
-    line = getLine(means, w, T=5, N=2)
-    line = [{'x': line[0, i], 'y': line[1, i]} for i in range(line.shape[1])]
-
-    output_data = {
-            'points': points,
-            'line': line
-    }
-
-    return output_data
+        return output_data

@@ -1,9 +1,10 @@
 import numpy as np
 from sklearn.svm import LinearSVC
 import pandas as pd
-from .utils import load_data, clean, one_hot_encode
+from utils import load_data, clean, one_hot_encode, label_encoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+
        
 def makeLine(xx, yy):
     leftPoint = {'x': xx[0], 'y': np.round(yy[0], 4)}
@@ -34,16 +35,15 @@ class svm:
         self.ytest = None
         self.labels = None
 
-    def train(self, *args):
-        df = load_data()
+    def train(self, filepath, fileext, *args):
+        df = load_data(filepath, fileext)
         df.reset_index(drop=True, inplace=True)
         df = clean(df)
         X = df.iloc[:, :-1]
-        X= one_hot_encode(X)
         self.labels = X.columns.values.tolist()
         X = X.iloc[1:, :]
         Y = df.iloc[1:, -1]
-        xtrain, ytrain, self.xtest, self.ytest = train_test_split(X, Y, test_size=args[0], random_state=42)
+        xtrain, self.xtest, ytrain, self.ytest = train_test_split(X, Y, test_size=args[0], random_state=42)
         self.clf = LinearSVC(penalty=args[1], C=args[2])
         self.clf.fit(xtrain, ytrain)
         return {
@@ -54,7 +54,7 @@ class svm:
 
     def test(self):
         pred = self.clf.predict(self.xtest)
-        report = classification_report(self.ytest, pred, labels=self.labels, output_dict=True, target_names=self.labels)
+        report = classification_report(self.ytest, pred, output_dict=True)
         return report
 
 
@@ -106,8 +106,10 @@ class svm:
 
 if __name__ == "__main__":
     svm = svm()
-    train = svm.train(0.25, 'l1', 0.80)
+    train = svm.train('../uploads/Sample.csv', 'csv', 0.25, 'l2', 0.80)
     print(train)
+    test = svm.test()
+    print(test)
    
 
     
