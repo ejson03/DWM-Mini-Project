@@ -22,7 +22,7 @@ export class LinReg extends Component {
         axios({
           method: "POST",
           url:PROXY_URL + "/train/lin-reg", 
-          data:  [this.state.testSplit]
+          data: [this.state.testSplit]
         }).then((response)=>{
           console.log(response);
         })

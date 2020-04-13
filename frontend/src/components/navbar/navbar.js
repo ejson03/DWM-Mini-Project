@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-// import history from './../history/history';
+import history from './../history/history';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,11 +42,11 @@ export const NavBar = _ => {
           </Typography>
         </Toolbar>
         <div>
-          <Button style={{ width: '8%' }} color="inherit"onClick={()=>{ pushLink('/')}}>Home</Button>
-          <Button style={{ width: '8%' }} color="inherit"onClick={()=>{ pushLink('/linear-regression')}}>Linear</Button>
-          <Button style={{ width: '8%' }} color="inherit"onClick={()=>{pushLink('/k-means')}}>K-Means</Button>
-          <Button style={{ width: '8%' }} color="inherit"onClick={()=>{pushLink('/svm')}}>SVM</Button>
-          <Button style={{ width: '8%' }} color ="inherit"onCLick={()=>{pushLink('/lda')}} >LDA</Button>
+          <Button style={{ width: '8%' }} color="inherit" onClick={()=>{pushLink('/')}}>Home</Button>
+          <Button style={{ width: '8%' }} color="inherit" onClick={()=>{pushLink('/lin-reg')}}>Linear</Button>
+          <Button style={{ width: '8%' }} color="inherit" onClick={()=>{pushLink('/k-means')}}>K-Means</Button>
+          <Button style={{ width: '8%' }} color="inherit" onClick={()=>{pushLink('/svm')}}>SVM</Button>
+          <Button style={{ width: '8%' }} color="inherit" onClick={()=>{pushLink('/lda')}}>LDA</Button>
         </div>
       </AppBar> 
     </div>      

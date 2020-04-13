@@ -16,7 +16,7 @@ export default class App extends Component {
             <NavBar/>
             <div className = "main-content" >
             <Switch>
-            <Route path = "/linear-regression"
+            <Route path = "/lin-reg"
             component = { LinReg }/>{" "} 
             <Route path = "/svm"
             component = { SVM }
