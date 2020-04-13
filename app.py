@@ -14,7 +14,7 @@ file_det = {}
 
 algos = {
     'svm': svm,
-    'lr': lin_regress,
+    'lin_regress': lin_regress,
     'kmeans': kmeans,
     'lda': lda
 }
@@ -53,8 +53,8 @@ def train(train_name):
         return None, 401
     
     params = request.get_json()
+    print(params)
     algo = service_class()
-    print(file_det)
     train = algo.train(file_det['path'], file_det['type'],params)
     print(train)
     # response = app.response_class(

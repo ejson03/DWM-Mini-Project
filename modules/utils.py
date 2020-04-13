@@ -62,10 +62,12 @@ def remove_outliers(real, discrete, output):
 
 def clean(df):
     df = drop_missing_data(df)  
+    print(df.head())
     output = df.iloc[:, -1]
     params = df.iloc[:, :-1]
     real = params.select_dtypes(exclude=['object', 'datetimetz'])
     discrete = params.select_dtypes(include=['object'])
+    print(discrete.head())
     discrete = label_encoder(discrete)
     #real, discrete = interpolate_missing_data(real, discrete)
     df = pd.concat([real, discrete, output], axis=1)

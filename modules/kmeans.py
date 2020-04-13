@@ -2,17 +2,19 @@ import numpy as np
 from sklearn.cluster import KMeans
 from .utils import load_data
 import json
+from sklearn.model_selection import train_test_split
+
 
 class kmeans:
     def __init__(self):
         self.clf = None
         self.k = None
 
-    def train(self, *args):
+    def train(self, params):
         df = load_data(filepath, fileext)
         df.reset_index(drop=True, inplace=True)
-        self.k = args[0]
-        self.clf = KMeans(n_clusters=args[2], init='random',
+        self.k = params[0]
+        self.clf = KMeans(n_clusters=params[0], init='random',
                     n_init=10, max_iter=300, 
                     tol=1e-04, random_state=0)
 

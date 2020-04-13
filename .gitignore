@@ -202,4 +202,5 @@ cython_debug/
 
 .vscode/
 uploads/
+samples/
 
