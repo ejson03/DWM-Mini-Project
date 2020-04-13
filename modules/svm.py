@@ -35,7 +35,7 @@ class svm:
         self.ytest = None
         self.labels = None
 
-    def train(self, filepath, fileext, *args):
+    def train(self, filepath, fileext, params):
         df = load_data(filepath, fileext)
         df.reset_index(drop=True, inplace=True)
         df = clean(df)
@@ -43,13 +43,12 @@ class svm:
         self.labels = X.columns.values.tolist()
         X = X.iloc[1:, :]
         Y = df.iloc[1:, -1]
-        xtrain, self.xtest, ytrain, self.ytest = train_test_split(X, Y, test_size=args[0], random_state=42)
-        self.clf = LinearSVC(penalty=args[1], C=args[2])
+        xtrain, self.xtest, ytrain, self.ytest = train_test_split(X, Y, test_size=float(params[0]), random_state=42)
+        self.clf = LinearSVC(penalty=params[1], C=float(params[2]))
         self.clf.fit(xtrain, ytrain)
         return {
-            'coef' : self.clf.coef_,
-            'intercept': self.clf.intercept_,
-            'classes': self.clf.classes_
+            'intercept': list(self.clf.intercept_),
+            'classes': list(self.clf.classes_)
         }
 
     def test(self):

@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import { Header } from 'semantic-ui-react';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import DiscreteSlider from '../discreateslider/discreateslider';
 import {PROXY_URL} from '../misc/proxyURL';
+import TextField from '@material-ui/core/TextField';
+import axios from 'axios';
 import './kmeans.css';
 
 const colors = [
@@ -23,23 +24,26 @@ export class KMeans extends Component {
     constructor() {
         super();
         this.state = {
-            // points: [{x: 1, y: 2, label: 0}, {x: 2, y: 1, label: 0}, {x: 3, y: 4, label: 0}],
-            // k: 1,
-            // centroids: [{x: 2.0, y: 2.3333333333333335, label: 0}],
-            // toggle: 0
+            k: '2'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     };
 
-    handleSubmit(event) {
-        event.preventDefault();
+    handleSubmit(e){
+        e.preventDefault();
+        console.log(this.state.k);
         
-        const data = new FormData(event.target);
-        
-        fetch(PROXY_URL + '/train/kmeans', {
-          method: 'POST',
-          body: data,
-        });
+        axios({
+          method: "POST",
+          url:PROXY_URL + '/train/kmeans', 
+          data:  [this.state.k]
+        }).then((response)=>{
+          console.log(response);
+        })
+      }
+    
+    onKChange(event) {
+        this.setState({k: event.target.value})
     }
 
     render() {
@@ -56,10 +60,25 @@ export class KMeans extends Component {
                         flexDirection: 'column',
                         alignItems: 'left'
                     }}>
-                        <form onSubmit={this.handleSubmit}>
-                            <DiscreteSlider name={'K'} defaultValue={2} step={1} min={2} max={10}/>
+                        <form onSubmit={this.handleSubmit.bind(this)} method="POST">
+                            <div>
+                                <TextField
+                                    id="k"
+                                    label="K (Value >= 2)"
+                                    type="number"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    variant="outlined"
+                                    defaultValue={'2'}
+                                    required
+                                    value={this.state.k}
+                                    onChange={this.onKChange.bind(this)}
+                                />
+                            </div>
                             <br /><br />
                             <Button type="submit" value="Submit" variant="contained" color="primary">Train</Button>
+                            <br /><br />
                         </form>
                     </Grid>
                     <Grid item xs={3} style={{

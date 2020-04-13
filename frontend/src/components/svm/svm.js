@@ -5,38 +5,49 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import { Header } from 'semantic-ui-react';
 import {PROXY_URL} from '../misc/proxyURL';
-import Penalty from '../penalty/penalty';
-import DiscreteSlider from '../discreateslider/discreateslider';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import TextField from '@material-ui/core/TextField';
+import axios from 'axios';
 import './svm.css';
 
 export class SVM extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            // points: [{x: 1, y: 2, label: 1}, {x: 2, y: 1, label: -1}, {x: 3, y: 4, label: 1}],
-            // c: 1,
-            // metadata: {
-            //     boundaryLine: [{x: 0.0, y: 0.0}, {x: 4.0, y: 3.996}],
-            //     upperLine: [{x: 0.0, y: 0.9995}, {x: 4.0, y: 4.9955}], 
-            //     lowerLine: [{x: 0.0, y: -0.9995}, {x: 4.0, y: 2.9965}],
-            //     colors: ['#000000', '#FF0000', '#0000FF'],
-            //     accuracy: '100.00%'
-            // },
-            // toggle: 0
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
-    };
-
-    handleSubmit(event) {
-        event.preventDefault();
-        
-        const data = new FormData(event.target);
-        
-        fetch(PROXY_URL + '/train/svm', {
-          method: 'POST',
-          body: data,
-        });
+            testSplit: '0.2',
+            penalty: 'l1',
+            c: '1'
+        }
     }
+
+    handleSubmit(e){
+        e.preventDefault();
+        console.log(this.state.testSplit, this.state.penalty, this.state.c);
+        
+        axios({
+          method: "POST",
+          url:PROXY_URL + "/train/svm", 
+          data:  [this.state.testSplit, this.state.penalty, this.state.c]
+        }).then((response)=>{
+          console.log(response);
+        })
+      }
+    
+      onTestSplitChange(event) {
+        this.setState({testSplit: event.target.value})
+      }
+    
+      onPenaltyChange(event) {
+        this.setState({penalty: event.target.value})
+      }
+    
+      onCChange(event) {
+        this.setState({c: event.target.value})
+      }
 
     render() {
         return (
@@ -51,14 +62,49 @@ export class SVM extends Component {
                     flexDirection: 'column',
                     alignItems: 'left'
                 }}>
-                    <form onSubmit={this.handleSubmit}>
-                        <Penalty/>
+                    <form onSubmit={this.handleSubmit.bind(this)} method="POST">
+                        <div>
+                            <TextField
+                                id="testSplit"
+                                label="TestSplit (0 > Value > 1)"
+                                type="number"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                variant="outlined"
+                                defaultValue={'0.2'}
+                                required
+                                value={this.state.testSplit}
+                                onChange={this.onTestSplitChange.bind(this)}
+                            />
+                        </div>
                         <br /><br />
-                        <DiscreteSlider name={'Test Split'} defaultValue={0.2} step={0.1} min={0} max={1}/>
+                        <FormControl component="fieldset">
+                            <FormLabel component="legend">Penalty</FormLabel>
+                            <RadioGroup aria-label="penalty" name="penalty" required value={this.state.penalty} onChange={this.onPenaltyChange.bind(this)}>
+                                <FormControlLabel value="l1" control={<Radio />} label="L1" />
+                                <FormControlLabel value="l2" control={<Radio />} label="L2" />
+                            </RadioGroup>
+                        </FormControl>
                         <br /><br />
-                        <DiscreteSlider name={'C'} defaultValue={1} step={0.1} min={0} max={1}/>
+                        <div>
+                            <TextField
+                                id="c"
+                                label="C (0 > Value > 1)"
+                                type="number"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                variant="outlined"
+                                defaultValue={1}
+                                required
+                                value={this.state.c}
+                                onChange={this.onCChange.bind(this)}
+                            />
+                        </div>
                         <br /><br />
                         <Button type="submit" value="Submit" variant="contained" color="primary">Train</Button>
+                        <br /><br />
                     </form>
                 </Grid>
                 <Grid item xs={3} style={{

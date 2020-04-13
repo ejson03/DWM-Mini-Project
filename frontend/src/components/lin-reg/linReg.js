@@ -3,34 +3,33 @@ import { Header } from 'semantic-ui-react';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import {PROXY_URL} from '../misc/proxyURL';
-import DiscreteSlider from '../discreateslider/discreateslider';
+import TextField from '@material-ui/core/TextField';
+import axios from 'axios';
 import './linReg.css';
 
 export class LinReg extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            // points: [{x: 1, y: 2}, {x: 2, y: 1}, {x: 3, y: 4}],
-            // metadata: {
-            //     bestFitLine: [{x: 1, y: 1.33}, {x: 3, y: 3.33}],
-            //     m: 1,
-            //     b: 0.33,
-            //     residual: 2.67
-            // },
-            // toggle: 0
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
-    };
+            testSplit: '0.2'
+        }
+    }
 
-    handleSubmit(event) {
-        event.preventDefault();
+    handleSubmit(e){
+        e.preventDefault();
+        console.log(this.state.testSplit);
         
-        const data = new FormData(event.target);
-        
-        fetch(PROXY_URL + '/train/svm', {
-          method: 'POST',
-          body: data,
-        });
+        axios({
+          method: "POST",
+          url:PROXY_URL + "/train/lin-reg", 
+          data:  [this.state.testSplit]
+        }).then((response)=>{
+          console.log(response);
+        })
+      }
+    
+    onTestSplitChange(event) {
+        this.setState({testSplit: event.target.value})
     }
 
     render() {
@@ -46,8 +45,22 @@ export class LinReg extends Component {
                         flexDirection: 'column',
                         alignItems: 'left'
                     }}>
-                        <form onSubmit={this.handleSubmit}>
-                            <DiscreteSlider name={'Test Split'} defaultValue={0.2} step={0.1} min={0} max={1}/>
+                        <form onSubmit={this.handleSubmit.bind(this)} method="POST">
+                            <div>
+                                <TextField
+                                    id="testSplit"
+                                    label="TestSplit (0 > Value > 1)"
+                                    type="number"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    variant="outlined"
+                                    defaultValue={'0.2'}
+                                    required
+                                    value={this.state.testSplit}
+                                    onChange={this.onTestSplitChange.bind(this)}
+                                />
+                            </div>
                             <br /><br />
                             <Button type="submit" value="Submit" variant="contained" color="primary">Train</Button>
                         </form>

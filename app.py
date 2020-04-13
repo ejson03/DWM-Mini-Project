@@ -5,6 +5,7 @@ from modules.lda import lda
 from flask import Flask, request, jsonify, render_template, abort, session
 from flask_cors import CORS
 import os.path
+import json
 
 app = Flask(__name__)
 app.secret_key = "abc"
@@ -37,6 +38,7 @@ def upload():
             data.save('uploads/' + data.filename)
             session['file'] = f'uploads/{data.filename}'
             session['filetype'] = ext
+            print(session)
             return jsonify({'response': 'File uploaded success!'})
         else:
             abort(404)
@@ -51,8 +53,14 @@ def train(train_name):
     
     params = request.get_json()
     algo = service_class()
-    train = algo.train(session['file'], session['filetype'],params)
-    return jsonify(train)
+    train = algo.train('./uploads/Sample.csv', 'csv',params)
+    print(train)
+    response = app.response_class(
+        response=json.dumps(train),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 @app.route('/test/<string:test_name>', methods=['POST'])
 def testroute(test_name):
