@@ -41,7 +41,7 @@ class HomePage extends React.Component {
                 </div>
                 <br/>
                 <div>
-                    <Button type="submit" variant="contained" color="primary">Submit</Button>
+                    <Button type="submit" valud="Submit" variant="contained" color="primary">Submit</Button>
                 </div>
             </form>
         </div>
