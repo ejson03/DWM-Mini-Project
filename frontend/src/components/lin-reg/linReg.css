@@ -24,12 +24,6 @@
     grid-column: 2/5;
 }
 
-.lin-reg__background {
-    padding-top: 25px;
-    padding-bottom: 50px;
-    width: 90%;
-}
-
 .lin-reg__stats {
     display: flex;
     align-items: top;

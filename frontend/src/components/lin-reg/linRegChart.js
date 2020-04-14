@@ -79,12 +79,12 @@ export class LinRegressChart extends Component {
             .curve(d3.curveMonotoneX);
 
         let bestFitLine = d3.select(this.chartArea)
-            .selectAll('.lin-regress__chart__best-fit-line')
+            .selectAll('.lin-reg__chart__best-fit-line')
             .data([this.props.bestFitLine]);
         
         bestFitLine.enter().append('path')
             .merge(bestFitLine)
-            .attr('class', 'lin-regress__chart__best-fit-line')
+            .attr('class', 'lin-reg__chart__best-fit-line')
             .attr('fill', 'none')
             .attr('stroke', '#000000')
             .attr('stroke-width', 3)
@@ -117,7 +117,7 @@ export class LinRegressChart extends Component {
 
     render() {
         return (
-            <div className="lin-regress__chart">
+            <div className="lin-reg__chart">
                 <svg className="chart" width={this.state.width} height={this.state.height}>
                     <g ref={(node) => { this.chartArea = node; }}
                         transform={`translate(${this.state.margin.left}, ${this.state.margin.top})`} />

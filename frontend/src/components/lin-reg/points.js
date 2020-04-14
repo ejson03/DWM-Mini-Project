@@ -20,9 +20,9 @@ export class Points extends Component {
 
     render() {
         return (
-            <div className="lin-regress__points">
+            <div className="lin-reg__points">
                 <h2><u>Points</u>:</h2>
-                <div className="lin-regress__points-list">
+                <div className="lin-reg__points-list">
                     <List>
                     {this.state.points.map((point, i) => {
                         return (
