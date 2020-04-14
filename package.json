@@ -1,0 +1,49 @@
+{
+    "name": "ML_Visualization_App",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@material-ui/core": "^4.9.10",
+        "@material-ui/icons": "^4.9.1",
+        "axios": "^0.19.2",
+        "d3": "^5.15.0",
+        "d3-tip": "^0.9.1",
+        "material-ui-dropzone": "^2.4.9",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "react-dropzone": "^10.2.2",
+        "react-dropzone-component": "^3.2.0",
+        "react-katex": "^2.0.2",
+        "react-router-dom": "^5.1.2",
+        "react-scripts": "^3.3.0",
+        "semantic-ui-css": "^2.4.1",
+        "semantic-ui-react": "^0.88.2"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d build"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "gh-pages": "^2.2.0"
+    },
+    "homepage": "http://ejson03.github.io/DWM-Mini-Project"
+}

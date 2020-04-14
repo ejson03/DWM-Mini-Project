@@ -1,0 +1,19 @@
+.xy-form__row {
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.xy-form__row__input {
+    width: 115px !important;
+}
+
+.xy-form__row__span {
+    color: red;
+    font-size: 1.1em;
+    margin-left: 10px;
+    -webkit-flex-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    justify-content: center;
+}
