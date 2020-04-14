@@ -16,6 +16,7 @@ export class LinReg extends Component {
         this.state = {
             testSplit: 0.2,
             points: [{x: 1, y: 2}, {x: 2, y: 1}, {x: 3, y: 4}],
+            res: [],
             metadata: {
                 bestFitLine: [{x: 1, y: 1.33}, {x: 3, y: 3.33}],
                 m: 1,
@@ -35,7 +36,12 @@ export class LinReg extends Component {
             url: PROXY_URL + "/train/lr",
             data: [this.state.testSplit]
         }).then((response) => {
-            console.log(response);
+            if(response.status === 200){
+            console.log("SUCCESSS")
+            console.log(response)
+            this.setState({res: response.body.data});   
+        }else
+            console.log("SOMETHING WENT WRONG")
         })
     }
 

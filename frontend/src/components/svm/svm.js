@@ -17,14 +17,13 @@ import axios from 'axios';
 import './svm.css';
 
 export class SVM extends Component {
-    // let test = response;
 
     constructor(props) {
         super(props);
         this.state = {
             testSplit: '0.2',
             penalty: 'l1',
-            c: '1',
+            cValue: '1',
             points: [{x: 1, y: 2, label: 1}, {x: 2, y: 1, label: -1}, {x: 3, y: 4, label: 1}],
             c: 1,
             metadata: {
@@ -40,12 +39,12 @@ export class SVM extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        console.log(this.state.testSplit, this.state.penalty, this.state.c);
+        console.log(this.state.testSplit, this.state.penalty, this.state.cValue);
         
         axios({
           method: "POST",
           url:PROXY_URL + "/train/svm", 
-          data:  [this.state.testSplit, this.state.penalty, this.state.c]
+          data:  [this.state.testSplit, this.state.penalty, this.state.cValue]
         }).then((response)=>{
             if(response.status === 200){
                 console.log("SUCCESSS")
@@ -64,8 +63,8 @@ export class SVM extends Component {
         this.setState({penalty: event.target.value})
       }
     
-      onCChange(event) {
-        this.setState({c: event.target.value})
+      onCValueChange(event) {
+        this.setState({cValue: event.target.value})
       }
 
     render() {
@@ -166,8 +165,8 @@ export class SVM extends Component {
                                 variant="outlined"
                                 defaultValue={1}
                                 required
-                                value={this.state.c}
-                                onChange={this.onCChange.bind(this)}
+                                value={this.state.cValue}
+                                onChange={this.onCValueChange.bind(this)}
                             />
                         </div>
                         <br /><br />
