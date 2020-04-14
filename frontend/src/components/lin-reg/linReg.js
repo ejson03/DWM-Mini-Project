@@ -102,7 +102,7 @@ export class LinReg extends Component {
                     alignItems: 'left'
                 }}>
                     <form onSubmit={this.handleSubmit.bind(this)} method="POST">
-                        <Button type="submit" value="Submit" variant="contained" color="primary">Train</Button>
+                        <Button type="submit" style={{ width: '40%' }} value="Submit" variant="contained" color="primary">Train</Button>
                         <br /><br /><br />
                         <div>
                             <TextField
@@ -127,14 +127,16 @@ export class LinReg extends Component {
                     flexDirection: 'column',
                     alignItems: 'center'
                 }}>
-                    <Button type="submit" variant="contained" color="primary" >Test</Button>
+                    
                 </Grid>
                 <Grid item xs={3} style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'flex-end'
                 }}>
-                    <Button type="sublit"  variant="contained" color="primary" >
+                    <Button type="submit" style={{ width: '40%' }} variant="contained" color="primary" >Test</Button>
+                    <br/>
+                    <Button type="sublit" style={{ width: '40%' }} variant="contained" color="primary" >
                         Result
                     </Button>
                 </Grid>
