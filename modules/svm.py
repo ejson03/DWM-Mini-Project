@@ -1,5 +1,5 @@
 import numpy as np
-from sklearn.svm import LinearSVC
+from sklearn.svm import LinearSVC, SVC
 import pandas as pd
 from .utils import load_data, clean, one_hot_encode, label_encoder
 from sklearn.model_selection import train_test_split
@@ -61,6 +61,7 @@ class svm:
     def pointTest(self, data, eps=1e-3):
         x = np.array(data["x"], dtype='float')
         y = np.array(data["y"], dtype='float')
+        c = float(data['c'])
         D = np.array([x, y]).T
         labels = np.array(data["labels"], dtype=np.int32)
         uniqueLabels = np.unique(labels)
@@ -74,13 +75,14 @@ class svm:
                 "accuracy": 'N/A'
             }
 
-        self.clf.fit(D, labels)
-        acc = 100 * np.sum(self.clf.predict(D) == labels) / labels.shape[0]
+        clf = SVC(kernel='linear', C=c)
+        clf.fit(D, labels)
+        acc = 100 * np.sum(clf.predict(D) == labels) / labels.shape[0]
         acc = np.round(acc, 2)
 
-        w = self.clf.coef_[0]
+        w = clf.coef_[0]
         m = -w[0] / (w[1] + eps)
-        b = -self.clf.intercept_[0] / (w[1] + eps)
+        b = -clf.intercept_[0] / (w[1] + eps)
 
         xx = np.array([np.floor(np.min(x)) - 1, np.ceil(np.max(x)) + 1])
         yy = m * xx + b
@@ -92,7 +94,7 @@ class svm:
         leftPoint, rightPoint = makeLine(xx, yy)
         upperLeft, upperRight = makeLine(xx, yy_up)
         downLeft, downRight = makeLine(xx, yy_down)
-        colors = getColors(self.clf, xx, yy_up, yy_down)
+        colors = getColors(clf, xx, yy_up, yy_down)
         
         output_data = {
             "boundaryLine": [leftPoint, rightPoint],

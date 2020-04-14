@@ -34,7 +34,7 @@ class lin_regress:
             'rmse': np.sqrt(metrics.mean_squared_error(self.ytest, pred))
         }
 
-    def pointTest(data):
+    def pointTest(self, data):
         if len(data['x']) == 0:
             return {
                 "pts": [{"x": 0, "y": 0}, {"x": 0, "y": 0}],

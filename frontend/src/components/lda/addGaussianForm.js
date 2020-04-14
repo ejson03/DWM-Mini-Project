@@ -10,7 +10,7 @@ function validNumber(str) {
 };
 
 export async function getMetadata(means, covarianceMatrices) {
-    const response = await fetch(PROXY_URL + '/lda', {
+    const response = await fetch(PROXY_URL + '/pointtest/lda', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

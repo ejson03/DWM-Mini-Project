@@ -17,7 +17,7 @@ export async function getMetadata(points, k) {
         y.push(point.y);
     });
     
-    const response = await fetch(PROXY_URL + '/kmeans', {
+    const response = await fetch(PROXY_URL + '/pointtest/kmeans', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

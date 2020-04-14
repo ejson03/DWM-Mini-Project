@@ -31,7 +31,7 @@ export async function getMetadata(points, c) {
         labels.push(point.label);
     });
     
-    const response = await fetch(PROXY_URL + '/svm', {
+    const response = await fetch(PROXY_URL + '/pointtest/svm', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

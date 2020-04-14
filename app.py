@@ -6,9 +6,11 @@ from flask import Flask, request, jsonify, render_template, abort, session
 from flask_cors import CORS
 import os.path
 import json
+import os
 
 app = Flask(__name__)
-app.secret_key = "abc"
+if not os.path.exists("uploads"):
+    os.makedirs("uploads")
 
 file_det = {}
 
@@ -29,8 +31,7 @@ cors = CORS(app, resources={
 def test():
     return "Hello"
 
-save_path = '/uploads/'
-exts = ['csv', 'json', 'yaml']
+exts = ['csv', 'json', 'yaml', 'yml']
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
@@ -57,11 +58,6 @@ def train(train_name):
     algo = service_class()
     train = algo.train(file_det['path'], file_det['type'],params)
     print(train)
-    # response = app.response_class(
-    #     response=json.dumps(train),
-    #     status=200,
-    #     mimetype='application/json'
-    # )
     return train
 
 @app.route('/test/<string:test_name>', methods=['POST'])
@@ -80,13 +76,15 @@ def testroute(test_name):
 @app.route('/pointtest/<string:point_name>', methods=['POST'])
 def pointtest(point_name):
     try:
-        service_func = algos[point_name]
+        service_class = algos[point_name]
     except:
         # service does not exist
         return None, 401
     
+    algo = service_class()
     data = request.get_json()
-    output_data = service_func(data)
+    print(data)
+    output_data = algo.pointTest(data)
     return jsonify(output_data)
 
 

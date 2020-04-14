@@ -44,7 +44,7 @@ def computeDiscriminant(means, covarianceMatrices):
 
 class lda:
 
-    def pointtest(data):
+    def pointtest(self, data):
         means = data["means"]
         means = [np.array(meanVec).astype(np.float64) for meanVec in means]
         covMats = data["covarianceMatrices"]
