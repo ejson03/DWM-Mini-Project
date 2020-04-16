@@ -4,9 +4,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { PROXY_URL } from '../misc/proxyURL';
 import TextField from '@material-ui/core/TextField';
-import {Points} from './points'
-import {AddPointForm} from './addPointForm';
-import {LinRegressChart} from './linRegChart';
+import { NavBar } from '../secNavBar/secNavBar';
 import axios from 'axios';
 import './linReg.css';
 
@@ -15,15 +13,7 @@ export class LinReg extends Component {
         super(props);
         this.state = {
             testSplit: 0.2,
-            points: [{x: 1, y: 2}, {x: 2, y: 1}, {x: 3, y: 4}],
             res: [],
-            metadata: {
-                bestFitLine: [{x: 1, y: 1.33}, {x: 3, y: 3.33}],
-                m: 1,
-                b: 0.33,
-                residual: 2.67
-            },
-            toggle: 0
         };
     };
 
@@ -56,45 +46,6 @@ export class LinReg extends Component {
                         size='huge'>
                     Linear Regression
                 </Header>
-                <div className="lin-reg">
-                    <AddPointForm 
-                        points={this.state.points}
-                        onNewPoint={
-                            point => this.setState({
-                                points: [...this.state.points, point]
-                            })
-                        }
-                        updateMetadata={
-                            newMetadata => this.setState({
-                                metadata: newMetadata,
-                                toggle: (this.state.toggle + 1) % 2
-                            })
-                        }
-                    />
-                    <Points 
-                        points={this.state.points}
-                        toggle={this.state.toggle}
-                        deletePoint={
-                            i => this.setState({
-                                    points: this.state.points.filter((_, idx) => i !== idx),
-                                    toggle: (this.state.toggle + 1) % 2
-                                })
-                        }
-                    />
-                    <LinRegressChart
-                        points={this.state.points}
-                        bestFitLine={this.state.metadata.bestFitLine}
-                    />
-                    <Header className='lin-reg__stats'
-                            size='small'
-                    >
-                        Slope of Line: {this.state.metadata.m}
-                        <br />
-                        Intercept: {this.state.metadata.b}
-                        <br />
-                        Total Residual: {this.state.metadata.residual}
-                    </Header>
-                </div>
                 <Grid style={{ marginTop: '50px' }} container spacing={0}>
                 <Grid item xs={3} style={{
                     display: 'flex',

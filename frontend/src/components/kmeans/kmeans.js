@@ -4,25 +4,8 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import {PROXY_URL} from '../misc/proxyURL';
 import TextField from '@material-ui/core/TextField';
-import {Points} from './points'
-import {AddPointForm} from './addPointForm';
-import {KMeansChart} from './kmeansChart';
-import {KMeansSlider} from './kmeansSlider';
 import axios from 'axios';
 import './kmeans.css';
-
-const colors = [
-    'red',
-    'green',
-    'blue',
-    'orange',
-    'green',
-    'sienna',
-    'peachpuff',
-    'purple',
-    'pink',
-    'turquoise'
-];
 
 export class KMeans extends Component {
     constructor(props) {
@@ -30,9 +13,6 @@ export class KMeans extends Component {
         this.state = {
             kvalue: 2,
             k: 2,
-            points: [{x: 1, y: 2, label: 0}, {x: 2, y: 1, label: 0}, {x: 3, y: 4, label: 0}],
-            centroids: [{x: 2.0, y: 2.3333333333333335, label: 0}],
-            toggle: 0
         };
     };
 
@@ -56,53 +36,12 @@ export class KMeans extends Component {
     render() {
         return (
             <div>
+                
                 <Header className='title'
                         size='huge'
                 >
                     K-Means
                 </Header>
-                <div className="kmeans">
-                    <AddPointForm 
-                        points={this.state.points}
-                        onNewPoint={
-                            point => this.setState({
-                                points: [...this.state.points, point]
-                            })
-                        }
-                        updateData={
-                            outputData => this.setState({
-                                centroids: outputData.centroids,
-                                points: outputData.points,
-                                toggle: (this.state.toggle + 1) % 2
-                            })
-                        }
-                        k={this.state.k}
-                    />
-                    <KMeansSlider 
-                        k={this.state.k}
-                        updateK={
-                            newK => this.setState({
-                                k: newK
-                            })
-                        }
-                        maxColors={colors.length}
-                    />
-                    <Points 
-                        points={this.state.points}
-                        toggle={this.state.toggle}
-                        deletePoint={
-                            i => this.setState({
-                                    points: this.state.points.filter((_, idx) => i !== idx),
-                                    toggle: (this.state.toggle + 1) % 2
-                                })
-                        }
-                    />
-                    <KMeansChart 
-                        points={this.state.points}
-                        centroids={this.state.centroids}
-                        colors={colors}
-                    />
-                </div>
                 <Grid style={{ marginTop: '50px' }} container spacing={0}>
                     <Grid item xs={3} style={{
                         display: 'flex',
