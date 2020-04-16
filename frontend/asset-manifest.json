@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/DWM-Mini-Project/static/css/main.51d9283c.chunk.css",
-    "main.js": "/DWM-Mini-Project/static/js/main.eb544837.chunk.js",
-    "main.js.map": "/DWM-Mini-Project/static/js/main.eb544837.chunk.js.map",
+    "main.js": "/DWM-Mini-Project/static/js/main.10c0d47a.chunk.js",
+    "main.js.map": "/DWM-Mini-Project/static/js/main.10c0d47a.chunk.js.map",
     "runtime-main.js": "/DWM-Mini-Project/static/js/runtime-main.b732611c.js",
     "runtime-main.js.map": "/DWM-Mini-Project/static/js/runtime-main.b732611c.js.map",
     "static/css/2.b5a277e1.chunk.css": "/DWM-Mini-Project/static/css/2.b5a277e1.chunk.css",
     "static/js/2.806a1f38.chunk.js": "/DWM-Mini-Project/static/js/2.806a1f38.chunk.js",
     "static/js/2.806a1f38.chunk.js.map": "/DWM-Mini-Project/static/js/2.806a1f38.chunk.js.map",
     "index.html": "/DWM-Mini-Project/index.html",
-    "precache-manifest.c972689b1c832495cf4db8df9c3215c8.js": "/DWM-Mini-Project/precache-manifest.c972689b1c832495cf4db8df9c3215c8.js",
+    "precache-manifest.b8d072ef6ccbaaae1fd9d3ba4aa05d49.js": "/DWM-Mini-Project/precache-manifest.b8d072ef6ccbaaae1fd9d3ba4aa05d49.js",
     "service-worker.js": "/DWM-Mini-Project/service-worker.js",
     "static/css/2.b5a277e1.chunk.css.map": "/DWM-Mini-Project/static/css/2.b5a277e1.chunk.css.map",
     "static/css/main.51d9283c.chunk.css.map": "/DWM-Mini-Project/static/css/main.51d9283c.chunk.css.map",
@@ -22,6 +22,6 @@
     "static/css/2.b5a277e1.chunk.css",
     "static/js/2.806a1f38.chunk.js",
     "static/css/main.51d9283c.chunk.css",
-    "static/js/main.eb544837.chunk.js"
+    "static/js/main.10c0d47a.chunk.js"
   ]
 }
