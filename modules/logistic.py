@@ -21,10 +21,10 @@ class logreg:
         Y = df.iloc[1:, -1]
         xtrain, self.xtest, ytrain, self.ytest = train_test_split(X, Y, test_size=float(params[0]), random_state=42)
         if (params[1]== "l1"):
-            dual = False
+            solver = "liblinear"
         else:
-            dual = True
-        self.clf = LogisticRegression(penalty=params[1], C=float(params[2]), dual=dual)
+            solver = "lbfgs"
+        self.clf = LogisticRegression(penalty=params[1], C=float(params[2]), solver=solver)
         self.clf.fit(xtrain, ytrain)
         return {
             'coef': json.dumps(self.clf.coef_.tolist()),

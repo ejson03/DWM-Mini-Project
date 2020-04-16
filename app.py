@@ -73,6 +73,7 @@ def testroute(test_name):
         return None, 401
     
     algo = service_class()
+    print(test_name)
     test = algo.test()
     return jsonify(test)
 
