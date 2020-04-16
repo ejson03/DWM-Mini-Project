@@ -12,7 +12,7 @@ def load_data(filepath, fileext):
     
     if (fileext == 'csv'):
         return pd.read_csv(filepath,  
-                 index_col=0, parse_dates=True)
+                 parse_dates=True)
     elif(fileext == 'json'):
         return pd.read_json(filepath, parse_dates=True)
     else:
@@ -61,15 +61,22 @@ def remove_outliers(real, discrete, output):
     # return df
 
 def clean(df):
-    df = drop_missing_data(df)  
+    print("Initially................")
+    print(df.head())
+    df = drop_missing_data(df) 
+    print("after dropping................................") 
     print(df.head())
     output = df.iloc[:, -1]
     params = df.iloc[:, :-1]
     real = params.select_dtypes(exclude=['object', 'datetimetz'])
     discrete = params.select_dtypes(include=['object'])
+    print("before label encoding................................") 
     print(discrete.head())
-    discrete = label_encoder(discrete)
+    if (not discrete.empty):
+        discrete = label_encoder(discrete)
+        df = pd.concat([real, discrete, output], axis=1)
+    else:
+        df = pd.concat([real, output], axis=1)
     #real, discrete = interpolate_missing_data(real, discrete)
-    df = pd.concat([real, discrete, output], axis=1)
     #df = remove_outliers(real, discrete, output)
     return df

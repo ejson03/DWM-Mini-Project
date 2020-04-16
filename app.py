@@ -1,8 +1,8 @@
-from modules.lin_regress import lin_regress
+from modules.lin_regress import linreg
 from modules.svm import svm
 from modules.kmeans import kmeans
-from modules.logistic import logistic
-from modules.bayes import bayes
+from modules.logistic import logreg
+from modules.bayes import nb
 from flask import Flask, request, jsonify, render_template, abort, session
 from flask_cors import CORS
 import os.path
@@ -17,15 +17,15 @@ file_det = {}
 
 algos = {
     'svm': svm,
-    'lin_regress': lin_regress,
+    'linreg': linreg,
     'kmeans': kmeans,
-    'logistic': logistic,
-    'bayes': bayes
+    'logreg': logreg,
+    'nb': nb
 }
-services = ['train', 'test', 'pointtest']
+services = ['uploads', 'train', 'test']
 
 cors = CORS(app, resources={
-    r'/{}/{}'.format(service,algo): {"origins": "*"} for service in services for algo in algos, '/upload'
+    r'/{}/{}'.format(service,algo): {"origins": "*"} for service in services for algo in algos
 }, expose_headers='Authorization')
 
 
@@ -34,15 +34,17 @@ def test():
     return "Hello"
 
 exts = ['csv', 'json', 'yaml', 'yml']
-@app.route('/upload', methods=['GET', 'POST'])
-def upload():
+@app.route('/uploads/<string:upload_name>', methods=['GET', 'POST'])
+def upload(upload_name):
     if request.method == 'POST':
         data = request.files['file']
         ext = data.filename.split('.')[1]
         if(ext in exts):
-            data.save('uploads/' + data.filename)
-            file_det['path'] = f'uploads/{data.filename}'
-            file_det['type'] = ext
+            if not os.path.exists(f'uploads/{upload_name}'):
+                os.makedirs(f'uploads/{upload_name}')
+            data.save(f'uploads/{upload_name}/{data.filename}')
+            file_det[f'{upload_name}_path'] = f'uploads/{upload_name}/{data.filename}'
+            file_det[f'{upload_name}_type'] = ext
             return jsonify({'response': 'File uploaded success!'})
         else:
             abort(404)
@@ -58,7 +60,7 @@ def train(train_name):
     params = request.get_json()
     print(params)
     algo = service_class()
-    train = algo.train(file_det['path'], file_det['type'],params)
+    train = algo.train(file_det[f'{train_name}_path'], file_det[f'{train_name}_type'],params)
     print(train)
     return train
 

@@ -12,7 +12,7 @@ class kmeans:
 
     def train(self, params):
         df = load_data(filepath, fileext)
-        df.reset_index(drop=True, inplace=True)
+        df.drop(df.filter(regex="Unname"),axis=1, inplace=True)
         df = clean(df)
         X = X.iloc[1:, :-1]
         Y = df.iloc[1:, -1]
