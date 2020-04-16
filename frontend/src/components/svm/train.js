@@ -1,46 +1,45 @@
-import React, {Component} from 'react';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
+import React, { Component } from 'react';
 import { Header } from 'semantic-ui-react';
-import {PROXY_URL} from '../misc/proxyURL';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import { PROXY_URL } from '../misc/proxyURL';
+import TextField from '@material-ui/core/TextField';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import TextField from '@material-ui/core/TextField';
-import TrainCard from './svmTrainCard';
+import { MiniNavBar } from './navBar';
 import axios from 'axios';
-import './svm.css';
 
-export class SVM extends Component {
-
+export class SVMTrain extends Component {
     constructor(props) {
         super(props);
         this.state = {
             testSplit: '0.2',
             penalty: 'l2',
             c: '1',
-        }
-    }
+            result: [],
+        };
+    };
 
-    handleSubmit(e){
+    handleSubmit(e) {
         e.preventDefault();
         console.log(this.state.testSplit, this.state.penalty, this.state.c);
-        
+
         axios({
-          method: "POST",
-          url: PROXY_URL + "/train/svm", 
-          data: [this.state.testSplit, this.state.penalty, this.state.c]
+            method: "POST",
+            url: PROXY_URL + "/train/svm",
+            data: [this.state.testSplit, this.state.penalty, this.state.c]
         }).then((res) => {
             if(res.status === 200){
-                console.log("SUCCESSS")
-                const trainRes = res.data;
-                console.log(trainRes)
-                this.setState({ trainRes });
-                console.log(this.trainRes)
-            }else
-                console.log("SOMETHING WENT WRONG")
+            console.log("SUCCESSS")
+            const result = res.data;
+            console.log(result)
+            this.setState({ result });
+            console.log(this.result)   
+        }else
+            console.log("SOMETHING WENT WRONG")
         })
     }
 
@@ -59,18 +58,24 @@ export class SVM extends Component {
     render() {
         return (
             <div>
-                <Header className='title'
-                        size='huge'>
-                    Support Vector Machine
+                <MiniNavBar />
+                <br /><br />
+                <Header size='huge'>
+                    Support Vector Machine:
                 </Header>
-                <Grid style={{ marginTop: '50px' }} container spacing={0}>
-                <Grid item xs={3} style={{
+                <br /><br />
+                <Grid container spacing={0}>
+                <Grid item xs={6} style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'left'
                 }}>
+                    <Header size = 'huge'>
+                        Insert Hyperparameters:
+                    </Header>
+                    <br />
                     <form onSubmit={this.handleSubmit.bind(this)} method="POST">
-                        <Button type="submit" style={{ width: '40%' }} value="Submit" variant="contained" color="primary">Train</Button>
+                        <Button type="submit" value="Submit" style={{ width: '21%' }} variant="contained" color="primary">Train</Button>
                         <br /><br /><br />
                         <div>
                             <TextField
@@ -90,7 +95,7 @@ export class SVM extends Component {
                         <br /><br />
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Penalty</FormLabel>
-                            <RadioGroup aria-label="penalty" name="penalty" required value={this.state.penalty} onChange={this.onPenaltyChange.bind(this)}>
+                            <RadioGroup aria-label="penalty" required value={this.state.penalty} onChange={this.onPenaltyChange.bind(this)}>
                                 <FormControlLabel default value="l1" control={<Radio />} label="L1" />
                                 <FormControlLabel value="l2" control={<Radio />} label="L2" />
                             </RadioGroup>
@@ -111,26 +116,16 @@ export class SVM extends Component {
                                 onChange={this.onCChange.bind(this)}
                             />
                         </div>
-                        <br /><br />
                     </form>
                 </Grid>
-                <Grid item xs={3} style={{
+                <Grid item xs={6} style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'left'
                 }}>
-                    <br />
-                </Grid>
-                <Grid item xs={3} style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-end'
-                }}>
-                    <Button type="submit" style={{ width: '40%' }} variant="contained" color="primary" >Test</Button>
-                    <br/><br/>
-                    <Button type="sublit" style={{ width: '40%' }} variant="contained" color="primary" >
-                        Result
-                    </Button>
+                    <Header size = 'huge'>
+                        Result:
+                    </Header>
                 </Grid>
             </Grid>
         </div>

@@ -4,16 +4,15 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { PROXY_URL } from '../misc/proxyURL';
 import TextField from '@material-ui/core/TextField';
-import { NavBar } from '../secNavBar/secNavBar';
+import { MiniNavBar } from './navBar';
 import axios from 'axios';
-import './linReg.css';
 
-export class LinReg extends Component {
+export class LinRegTrain extends Component {
     constructor(props) {
         super(props);
         this.state = {
             testSplit: 0.2,
-            res: [],
+            result: [],
         };
     };
 
@@ -23,13 +22,15 @@ export class LinReg extends Component {
 
         axios({
             method: "POST",
-            url: PROXY_URL + "/train/lr",
+            url: PROXY_URL + "/train/linreg",
             data: [this.state.testSplit]
-        }).then((response) => {
-            if(response.status === 200){
+        }).then((res) => {
+            if(res.status === 200){
             console.log("SUCCESSS")
-            console.log(response)
-            this.setState({res: response.body.data});   
+            const result = res.data;
+            console.log(result)
+            this.setState({ result });
+            console.log(this.result)
         }else
             console.log("SOMETHING WENT WRONG")
         })
@@ -42,18 +43,24 @@ export class LinReg extends Component {
     render() {
         return (
             <div>
-                <Header className='title'
-                        size='huge'>
-                    Linear Regression
+                <MiniNavBar />
+                <br /><br />
+                <Header size='huge'>
+                    Linear Regression:
                 </Header>
-                <Grid style={{ marginTop: '50px' }} container spacing={0}>
-                <Grid item xs={3} style={{
+                <br /><br />
+                <Grid container spacing={0}>
+                <Grid item xs={6} style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'left'
                 }}>
+                    <Header size = 'huge'>
+                        Insert Hyperparameters:
+                    </Header>
+                    <br />
                     <form onSubmit={this.handleSubmit.bind(this)} method="POST">
-                        <Button type="submit" style={{ width: '40%' }} value="Submit" variant="contained" color="primary">Train</Button>
+                        <Button type="submit" value="Submit" style={{ width: '21%' }} variant="contained" color="primary">Train</Button>
                         <br /><br /><br />
                         <div>
                             <TextField
@@ -70,26 +77,16 @@ export class LinReg extends Component {
                                 onChange={this.onTestSplitChange.bind(this)}
                             />
                         </div>
-                        <br /><br />
                     </form>
                 </Grid>
-                <Grid item xs={3} style={{
+                <Grid item xs={6} style={{
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center'
+                    alignItems: 'left'
                 }}>
-                    
-                </Grid>
-                <Grid item xs={3} style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-end'
-                }}>
-                    <Button type="submit" style={{ width: '40%' }} variant="contained" color="primary" >Test</Button>
-                    <br/>
-                    <Button type="sublit" style={{ width: '40%' }} variant="contained" color="primary" >
-                        Result
-                    </Button>
+                    <Header size = 'huge'>
+                        Result:
+                    </Header>
                 </Grid>
             </Grid>
         </div>
