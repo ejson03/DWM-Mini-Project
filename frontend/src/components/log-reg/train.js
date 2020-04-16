@@ -16,6 +16,7 @@ export class LogRegTrain extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            testSplit: '0.2',
             penalty: 'l2',
             c: '1',
             result: [],
@@ -24,12 +25,12 @@ export class LogRegTrain extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log(this.state.penalty, this.state.c);
+        console.log(this.state.testSplit, this.state.penalty, this.state.c);
 
         axios({
             method: "POST",
             url: PROXY_URL + "/train/logreg",
-            data: [this.state.penalty, this.state.c]
+            data: [this.state.testSplit, this.state.penalty, this.state.c]
         }).then((res) => {
             if(res.status === 200){
             console.log("SUCCESSS")
@@ -40,6 +41,10 @@ export class LogRegTrain extends Component {
         }else
             console.log("SOMETHING WENT WRONG")
         })
+    }
+
+    onTestSplitChange(event) {
+        this.setState({testSplit: event.target.value})
     }
 
     onPenaltyChange(event) {
@@ -72,6 +77,22 @@ export class LogRegTrain extends Component {
                     <form onSubmit={this.handleSubmit.bind(this)} method="POST">
                         <Button type="submit" value="Submit" style={{ width: '21%' }} variant="contained" color="primary">Train</Button>
                         <br /><br /><br />
+                        <div>
+                            <TextField
+                                id="testSplit"
+                                label="TestSplit (0 > Value > 1)"
+                                type="number"
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                variant="outlined"
+                                defaultValue={'0.2'}
+                                required
+                                value={this.state.testSplit}
+                                onChange={this.onTestSplitChange.bind(this)}
+                            />
+                        </div>
+                        <br /><br />
                         <FormControl component="fieldset">
                             <FormLabel component="legend">Penalty</FormLabel>
                             <RadioGroup aria-label="penalty" required value={this.state.penalty} onChange={this.onPenaltyChange.bind(this)}>
