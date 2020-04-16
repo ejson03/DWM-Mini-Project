@@ -18,9 +18,9 @@ export class SVM extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            testSplit: 0.2,
+            testSplit: '0.2',
             penalty: 'l2',
-            c: 1,
+            c: '1',
         }
     }
 
