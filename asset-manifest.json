@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/DWM-Mini-Project/static/css/main.9039ac91.chunk.css",
-    "main.js": "/DWM-Mini-Project/static/js/main.8a0d11b1.chunk.js",
-    "main.js.map": "/DWM-Mini-Project/static/js/main.8a0d11b1.chunk.js.map",
+    "main.css": "/DWM-Mini-Project/static/css/main.51d9283c.chunk.css",
+    "main.js": "/DWM-Mini-Project/static/js/main.4a6d1dfb.chunk.js",
+    "main.js.map": "/DWM-Mini-Project/static/js/main.4a6d1dfb.chunk.js.map",
     "runtime-main.js": "/DWM-Mini-Project/static/js/runtime-main.b732611c.js",
     "runtime-main.js.map": "/DWM-Mini-Project/static/js/runtime-main.b732611c.js.map",
     "static/css/2.b5a277e1.chunk.css": "/DWM-Mini-Project/static/css/2.b5a277e1.chunk.css",
-    "static/js/2.c59bd937.chunk.js": "/DWM-Mini-Project/static/js/2.c59bd937.chunk.js",
-    "static/js/2.c59bd937.chunk.js.map": "/DWM-Mini-Project/static/js/2.c59bd937.chunk.js.map",
+    "static/js/2.806a1f38.chunk.js": "/DWM-Mini-Project/static/js/2.806a1f38.chunk.js",
+    "static/js/2.806a1f38.chunk.js.map": "/DWM-Mini-Project/static/js/2.806a1f38.chunk.js.map",
     "index.html": "/DWM-Mini-Project/index.html",
-    "precache-manifest.7afe78418118bc21a58c6e4c4a74678b.js": "/DWM-Mini-Project/precache-manifest.7afe78418118bc21a58c6e4c4a74678b.js",
+    "precache-manifest.5659f7e1d8b4194fe89a4ffb55675abe.js": "/DWM-Mini-Project/precache-manifest.5659f7e1d8b4194fe89a4ffb55675abe.js",
     "service-worker.js": "/DWM-Mini-Project/service-worker.js",
     "static/css/2.b5a277e1.chunk.css.map": "/DWM-Mini-Project/static/css/2.b5a277e1.chunk.css.map",
-    "static/css/main.9039ac91.chunk.css.map": "/DWM-Mini-Project/static/css/main.9039ac91.chunk.css.map",
-    "static/js/2.c59bd937.chunk.js.LICENSE": "/DWM-Mini-Project/static/js/2.c59bd937.chunk.js.LICENSE",
+    "static/css/main.51d9283c.chunk.css.map": "/DWM-Mini-Project/static/css/main.51d9283c.chunk.css.map",
+    "static/js/2.806a1f38.chunk.js.LICENSE": "/DWM-Mini-Project/static/js/2.806a1f38.chunk.js.LICENSE",
     "static/media/katex.min.css": "/DWM-Mini-Project/static/media/KaTeX_Typewriter-Regular.f43e8696.woff2",
     "static/media/semantic.min.css": "/DWM-Mini-Project/static/media/outline-icons.ef60a4f6.woff"
   },
   "entrypoints": [
     "static/js/runtime-main.b732611c.js",
     "static/css/2.b5a277e1.chunk.css",
-    "static/js/2.c59bd937.chunk.js",
-    "static/css/main.9039ac91.chunk.css",
-    "static/js/main.8a0d11b1.chunk.js"
+    "static/js/2.806a1f38.chunk.js",
+    "static/css/main.51d9283c.chunk.css",
+    "static/js/main.4a6d1dfb.chunk.js"
   ]
 }
