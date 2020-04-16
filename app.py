@@ -9,7 +9,7 @@ import os.path
 import json
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder = './frontend', template_folder="./frontend/static")
 if not os.path.exists("uploads"):
     os.makedirs("uploads")
 
@@ -31,10 +31,10 @@ cors = CORS(app, resources={
 
 @app.route('/', methods=['GET'])
 def test():
-    return "Hello"
+    return render_template("index.html")
 
 exts = ['csv', 'json', 'yaml', 'yml']
-@app.route('/uploads/<string:upload_name>', methods=['GET', 'POST'])
+@app.route('/uploads/<string:upload_name>', methods=['POST'])
 def upload(upload_name):
     if request.method == 'POST':
         data = request.files['file']
@@ -64,7 +64,7 @@ def train(train_name):
     print(train)
     return train
 
-@app.route('/test/<string:test_name>', methods=['POST'])
+@app.route('/test/<string:test_name>', methods=['GET'])
 def testroute(test_name):
     try:
         service_class = algos[test_name]
