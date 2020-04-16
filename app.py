@@ -9,7 +9,7 @@ import os.path
 import json
 import os
 
-app = Flask(__name__, static_folder = './frontend', template_folder="./frontend/static")
+app = Flask(__name__, static_folder = "./frontend/static", template_folder="./frontend")
 if not os.path.exists("uploads"):
     os.makedirs("uploads")
 
