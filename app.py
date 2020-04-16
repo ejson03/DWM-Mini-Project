@@ -1,7 +1,8 @@
 from modules.lin_regress import lin_regress
 from modules.svm import svm
 from modules.kmeans import kmeans
-from modules.lda import lda
+from modules.logistic import logistic
+from modules.bayes import bayes
 from flask import Flask, request, jsonify, render_template, abort, session
 from flask_cors import CORS
 import os.path
@@ -18,12 +19,13 @@ algos = {
     'svm': svm,
     'lin_regress': lin_regress,
     'kmeans': kmeans,
-    'lda': lda
+    'logistic': logistic,
+    'bayes': bayes
 }
 services = ['train', 'test', 'pointtest']
 
 cors = CORS(app, resources={
-    r'/{}/{}'.format(service,algo): {"origins": "*"} for service in services for algo in algos 
+    r'/{}/{}'.format(service,algo): {"origins": "*"} for service in services for algo in algos, '/upload'
 }, expose_headers='Authorization')
 
 
@@ -72,20 +74,6 @@ def testroute(test_name):
     test = algo.test()
     return jsonify(test)
 
-
-@app.route('/pointtest/<string:point_name>', methods=['POST'])
-def pointtest(point_name):
-    try:
-        service_class = algos[point_name]
-    except:
-        # service does not exist
-        return None, 401
-    
-    algo = service_class()
-    data = request.get_json()
-    print(data)
-    output_data = algo.pointTest(data)
-    return jsonify(output_data)
 
 
 if __name__ == "__main__":
