@@ -5,8 +5,8 @@ from pandas import get_dummies, Series
 import yaml 
 import numpy as np 
 from scipy import stats
-from flask import session
 from sklearn.preprocessing import LabelEncoder
+import json
 
 def load_data(filepath, fileext):
     
@@ -18,6 +18,15 @@ def load_data(filepath, fileext):
     else:
         with open(filepath, 'r') as f:
             return json_normalize(yaml.load(f))
+
+def formatFrame(state):
+    frame_rep = dict()
+    frame_rep["columns"] = [{
+        "Header": x,
+        "accessor": x
+    } for x in state["frame"]]
+    frame_rep["data"] = json.loads(state["frame"].to_json(orient="records"))
+    return frame_rep
 
 
 def one_hot_encode(data):

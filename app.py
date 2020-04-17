@@ -5,6 +5,8 @@ from modules.logistic import logreg
 from modules.bayes import nb
 from flask import Flask, request, jsonify, render_template, abort
 from flask_cors import CORS
+from io import StringIO
+from modules.utils import formatFrame
 import os.path
 import json
 import os
@@ -24,9 +26,10 @@ algos = {
 }
 services = ['uploads', 'train', 'test']
 
-cors = CORS(app, resources={
-    r'/{}/{}'.format(service,algo): {"origins": "*"} for service in services for algo in algos
-}, expose_headers='Authorization')
+cors = CORS(app)
+# , resources={
+#     r'/{}/{}'.format(service,algo): {"origins": "*"} for service in services for algo in algos
+# }, expose_headers='Authorization')
 
 
 @app.route('/', methods=['GET'])
@@ -48,6 +51,13 @@ def upload(upload_name):
             return jsonify({'response': 'File uploaded success!'})
         else:
             abort(404)
+
+@app.route('/create', methods=["POST"])
+def createFrame():
+    state = {}
+    data = StringIO(request.json["data"], '\r')
+    state["frame"] = pd.read_csv(data, engine="python")
+    return jsonify(formatFrame(state))
 
 @app.route('/train/<string:train_name>', methods=['POST'])
 def train(train_name):
