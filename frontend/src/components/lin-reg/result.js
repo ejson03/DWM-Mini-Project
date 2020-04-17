@@ -10,16 +10,21 @@ export class LinRegResult extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            result: [],
+            result: []
         };
     };
 
     handleSubmit() {
-        axios.get(PROXY_URL + '/test/linreg')
+        axios.get(PROXY_URL + '/result/linreg')
             .then(res => {
-                const result = res.data;
-                this.setState({ result });
-      })
+                if(res.status === 200){
+                    console.log("SUCCESSS")
+                    console.log(res)
+                    this.setState({ result: res.data });
+                    console.log(this.state.result)
+                }else
+                    console.log("SOMETHING WENT WRONG")
+            })
     }
 
     render() {

@@ -8,7 +8,9 @@ import { MiniNavBar } from './navBar';
 export class SVMAbout extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            uploadStatus: ''
+        };
         this.uploadFile = this.uploadFile.bind(this);
     }
     
@@ -21,7 +23,21 @@ export class SVMAbout extends Component {
         fetch(PROXY_URL + '/uploads/svm', {
             method: 'POST',
             body: data,
-        });
+        }).then(res => {
+            if(res.status === 200){
+                let uploadStatus = 'Success!';
+                console.log(uploadStatus)
+                this.setState({ uploadStatus });
+            }else{
+                let uploadStatus = 'Something Went Wrong!';
+                console.log(uploadStatus)
+                this.setState({ uploadStatus });
+            }
+        }).catch((error) => {
+            let uploadStatus = error.toString( );
+            console.log(uploadStatus)
+            this.setState({ uploadStatus });
+          });
     }
 
     render() {

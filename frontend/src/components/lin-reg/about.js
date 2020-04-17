@@ -8,7 +8,9 @@ import { MiniNavBar } from './navBar';
 export class LinRegAbout extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            uploadStatus: ''
+        };
         this.uploadFile = this.uploadFile.bind(this);
     }
     
@@ -21,7 +23,21 @@ export class LinRegAbout extends Component {
         fetch(PROXY_URL + '/uploads/linreg', {
             method: 'POST',
             body: data,
-        });
+        }).then(res => {
+            if(res.status === 200){
+                let uploadStatus = 'Success!';
+                console.log(uploadStatus)
+                this.setState({ uploadStatus });
+            }else{
+                let uploadStatus = 'Something Went Wrong!';
+                console.log(uploadStatus)
+                this.setState({ uploadStatus });
+            }
+        }).catch((error) => {
+            let uploadStatus = error.toString( );
+            console.log(uploadStatus)
+            this.setState({ uploadStatus });
+          });
     }
 
     render() {
@@ -67,11 +83,11 @@ export class LinRegAbout extends Component {
                 <YouTube
                     videoId="CtKeHnfK5uA"
                     opts={{
-                    height: '390',
-                    width: '694',
-                    playerVars: { // https://developers.google.com/youtube/player_parameters
-                        autoplay: false
-                    }
+                        height: '390',
+                        width: '694',
+                        playerVars: { // https://developers.google.com/youtube/player_parameters
+                            autoplay: false
+                        }
                     }}
                 />
                 <br />

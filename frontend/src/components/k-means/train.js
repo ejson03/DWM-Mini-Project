@@ -4,6 +4,9 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { PROXY_URL } from '../misc/proxyURL';
 import TextField from '@material-ui/core/TextField';
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 import { MiniNavBar } from './navBar';
 import axios from 'axios';
 
@@ -13,6 +16,7 @@ export class KMeansTrain extends Component {
         this.state = {
             k: 2,
             result: [],
+            uploadStatus: ''
         };
     };
 
@@ -26,14 +30,21 @@ export class KMeansTrain extends Component {
             data: [this.state.k]
         }).then((res) => {
             if(res.status === 200){
-            console.log("SUCCESSS")
-            const result = res.data;
-            console.log(result)
-            this.setState({ result });
-            console.log(this.result)
-        }else
-            console.log("SOMETHING WENT WRONG")
-        })
+                let uploadStatus = 'Success!';
+                console.log(uploadStatus)
+                this.setState({ uploadStatus });
+                console.log(res)
+                this.setState({ result: res.data });
+            }else{
+                let uploadStatus = 'Something Went Wrong!';
+                console.log(uploadStatus)
+                this.setState({ uploadStatus });
+            }
+        }).catch((error) => {
+            let uploadStatus = error.toString( );
+            console.log(uploadStatus)
+            this.setState({ uploadStatus });
+          });
     }
 
     onKChange(event) {
@@ -62,6 +73,10 @@ export class KMeansTrain extends Component {
                     <form onSubmit={this.handleSubmit.bind(this)} method="POST">
                         <Button type="submit" value="Submit" style={{ width: '21%' }} variant="contained" color="primary">Train</Button>
                         <br /><br /><br />
+                        <Typography variant={"h6"} gutterBottom>
+                            <b>{this.state.uploadStatus}</b>
+                        </Typography>
+                        <br/>
                         <div>
                             <TextField
                                 id="k"
@@ -87,6 +102,29 @@ export class KMeansTrain extends Component {
                     <Header size = 'huge'>
                         Result:
                     </Header>
+                    <Card
+                        style={{
+                            width: "95%",
+                            margin: '2.5%',
+                            transition: "0.3s",
+                            boxShadow: "0 12px 40px -12px rgba(0,0,0,0.3)",
+                            "&:hover": {
+                            boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
+                            }
+                        }}
+                        >
+                        <CardContent>
+                            <Typography variant={"h6"} gutterBottom>
+                                <b>Centers: </b>{this.state.result.centers}
+                            </Typography>
+                            <Typography variant={"h6"}>
+                                <b>Labels: </b>{this.state.result.labels}
+                            </Typography>
+                            <Typography variant={"h6"}>
+                                <b>Preds: </b>{this.state.result.preds}
+                            </Typography>
+                        </CardContent>
+                    </Card>
                 </Grid>
             </Grid>
         </div>

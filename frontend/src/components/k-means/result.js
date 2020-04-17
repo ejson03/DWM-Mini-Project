@@ -10,16 +10,21 @@ export class KMeansResult extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            result: [],
+            result: []
         };
     };
 
     handleSubmit() {
-        axios.get(PROXY_URL + '/test/kmeans')
+        axios.get(PROXY_URL + '/result/kmeans')
             .then(res => {
-                const result = res.data;
-                this.setState({ result });
-      })
+                if(res.status === 200){
+                    console.log("SUCCESSS")
+                    console.log(res)
+                    this.setState({ result: res.data });
+                    console.log(this.state.result)
+                }else
+                    console.log("SOMETHING WENT WRONG")
+            })
     }
 
     render() {

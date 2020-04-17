@@ -2,13 +2,16 @@ import React, { Component } from 'react';
 import YouTube from 'react-youtube';
 import { Header } from 'semantic-ui-react';
 import Button from '@material-ui/core/Button';
+import Typography from "@material-ui/core/Typography";
 import { PROXY_URL } from '../misc/proxyURL';
 import { MiniNavBar } from './navBar';
 
 export class KMeansAbout extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            uploadStatus: ''
+        };
         this.uploadFile = this.uploadFile.bind(this);
     }
     
@@ -21,7 +24,21 @@ export class KMeansAbout extends Component {
         fetch(PROXY_URL + '/uploads/kmeans', {
             method: 'POST',
             body: data,
-        });
+        }).then(res => {
+            if(res.status === 200){
+                let uploadStatus = 'Success!';
+                console.log(uploadStatus)
+                this.setState({ uploadStatus });
+            }else{
+                let uploadStatus = 'Something Went Wrong!';
+                console.log(uploadStatus)
+                this.setState({ uploadStatus });
+            }
+        }).catch((error) => {
+            let uploadStatus = error.toString( );
+            console.log(uploadStatus)
+            this.setState({ uploadStatus });
+          });
     }
 
     render() {
@@ -58,6 +75,10 @@ export class KMeansAbout extends Component {
                             Upload
                         </Button>
                     </div>
+                    <br/>
+                    <Typography variant={"h6"} gutterBottom>
+                        <b>{this.state.uploadStatus}</b>
+                    </Typography>
                 </form>
                 <br />
                 <Header size='huge'>

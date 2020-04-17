@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Header } from 'semantic-ui-react';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Typography from "@material-ui/core/Typography";
 import { PROXY_URL } from '../misc/proxyURL';
 import { MiniNavBar } from './navBar';
 import axios from 'axios';
@@ -11,15 +12,29 @@ export class KMeansTest extends Component {
         super(props);
         this.state = {
             result: [],
+            uploadStatus: ''
         };
     };
 
     handleSubmit() {
         axios.get(PROXY_URL + '/test/kmeans')
-            .then(res => {
-                const result = res.data;
-                this.setState({ result });
-      })
+            .then((res) => {
+                if(res.status === 200){
+                    let uploadStatus = 'Success!';
+                    console.log(uploadStatus)
+                    this.setState({ uploadStatus });
+                    console.log(res)
+                    this.setState({ result: res.data });
+                }else{
+                    let uploadStatus = 'Something Went Wrong!';
+                    console.log(uploadStatus)
+                    this.setState({ uploadStatus });
+                }
+            }).catch((error) => {
+                let uploadStatus = error.toString( );
+                console.log(uploadStatus)
+                this.setState({ uploadStatus });
+            });
     }
 
     render() {
@@ -44,6 +59,10 @@ export class KMeansTest extends Component {
                     <form onSubmit={this.handleSubmit.bind(this)} method="GET">
                         <Button type="submit" value="Submit" style={{ width: '21%' }} variant="contained" color="primary">Test</Button>
                     </form>
+                    <Typography variant={"h6"} gutterBottom>
+                        <b>{this.state.uploadStatus}</b>
+                    </Typography>
+                    <br/>
                 </Grid>
                 <Grid item xs={6} style={{
                     display: 'flex',

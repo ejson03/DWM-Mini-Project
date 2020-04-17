@@ -9,6 +9,9 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 import { MiniNavBar } from './navBar';
 import axios from 'axios';
 
@@ -19,6 +22,7 @@ export class NBTrain extends Component {
             testSplit: '0.2',
             algo: '1',
             result: [],
+            uploadStatus: ''
         };
     };
 
@@ -32,14 +36,21 @@ export class NBTrain extends Component {
             data: [this.state.testSplit, this.state.algo]
         }).then((res) => {
             if(res.status === 200){
-            console.log("SUCCESSS")
-            const result = res.data;
-            console.log(result)
-            this.setState({ result });
-            console.log(this.result)
-        }else
-            console.log("SOMETHING WENT WRONG")
-        })
+                let uploadStatus = 'Success!';
+                console.log(uploadStatus)
+                this.setState({ uploadStatus });
+                console.log(res)
+                this.setState({ result: res.data });
+            }else{
+                let uploadStatus = 'Something Went Wrong!';
+                console.log(uploadStatus)
+                this.setState({ uploadStatus });
+            }
+        }).catch((error) => {
+            let uploadStatus = error.toString( );
+            console.log(uploadStatus)
+            this.setState({ uploadStatus });
+          });
     }
 
     onTestSplitChange(event) {
@@ -72,6 +83,10 @@ export class NBTrain extends Component {
                     <form onSubmit={this.handleSubmit.bind(this)} method="POST">
                         <Button type="submit" value="Submit" style={{ width: '21%' }} variant="contained" color="primary">Train</Button>
                         <br /><br /><br />
+                        <Typography variant={"h6"} gutterBottom>
+                            <b>{this.state.uploadStatus}</b>
+                        </Typography>
+                        <br/>
                         <div>
                             <TextField
                                 id="testSplit"
@@ -92,10 +107,8 @@ export class NBTrain extends Component {
                             <FormLabel component="legend">Algorithm</FormLabel>
                             <RadioGroup aria-label="algorithm" required value={this.state.algo} onChange={this.onAlgoChange.bind(this)}>
                                 <FormControlLabel default value="1" control={<Radio />} label="BernoulliNB" />
-                                <FormControlLabel value="2" control={<Radio />} label="CategoricalNB" />
-                                <FormControlLabel value="3" control={<Radio />} label="ComplementNB" />
-                                <FormControlLabel value="4" control={<Radio />} label="GaussianNB" />
-                                <FormControlLabel value="5" control={<Radio />} label="MultinominalNB" />
+                                <FormControlLabel value="2" control={<Radio />} label="GaussianNB" />
+                                <FormControlLabel value="3" control={<Radio />} label="MultinominalNB" />
                             </RadioGroup>
                         </FormControl>
                     </form>
@@ -108,6 +121,29 @@ export class NBTrain extends Component {
                     <Header size = 'huge'>
                         Result:
                     </Header>
+                    <Card
+                        style={{
+                            width: "95%",
+                            margin: '2.5%',
+                            transition: "0.3s",
+                            boxShadow: "0 12px 40px -12px rgba(0,0,0,0.3)",
+                            "&:hover": {
+                            boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
+                            }
+                        }}
+                        >
+                        <CardContent>
+                            <Typography id="classes" variant={"h6"} gutterBottom>
+                                <b>Classes: </b>{this.state.result.classes}
+                            </Typography>
+                            <Typography id="coef" variant={"h6"}>
+                                <b>Coef: </b>{this.state.result.coef}
+                            </Typography>
+                            <Typography id="intercept" variant={"h6"}>
+                                <b>Intercept: </b>{this.state.result.intercept}
+                            </Typography>
+                        </CardContent>
+                    </Card>
                 </Grid>
             </Grid>
         </div>
