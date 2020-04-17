@@ -20,7 +20,8 @@ class nb:
         X = df.iloc[1:, :-1]
         Y = df.iloc[1:, -1]
         xtrain, self.xtest, ytrain, self.ytest = train_test_split(X, Y, test_size=float(params[0]), random_state=42)
-        self.clf = param[1]()
+        clf = param[1]
+        self.clf = clf()
         self.clf.fit(xtrain, ytrain)
         if(param[1] == GaussianNB):
             return {
