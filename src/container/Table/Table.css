@@ -1,0 +1,4 @@
+.ReactTable .rt-tbody .rt-td {
+  white-space: pre-line !important;
+  word-wrap: break-word;
+}
