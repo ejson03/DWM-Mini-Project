@@ -6,6 +6,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
 import json
 
+algos = [BernoulliNB, GaussianNB, MultinomialNB ]
+
 class nb:
     def __init__(self):
         self.clf = None
@@ -20,10 +22,10 @@ class nb:
         X = df.iloc[1:, :-1]
         Y = df.iloc[1:, -1]
         xtrain, self.xtest, ytrain, self.ytest = train_test_split(X, Y, test_size=float(params[0]), random_state=42)
-        clf = param[1]
+        clf = algos[int(params[1]) -1]
         self.clf = clf()
         self.clf.fit(xtrain, ytrain)
-        if(param[1] == GaussianNB):
+        if(params[1] == GaussianNB):
             return {
                 'classes': json.dumps(self.clf.classes_.tolist())
             }

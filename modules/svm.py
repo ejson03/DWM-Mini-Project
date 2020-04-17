@@ -33,7 +33,6 @@ class svm:
         }
 
     def test(self):
-        print(self.xtest, self.clf.coef_)
         pred = self.clf.predict(self.xtest)
         report = classification_report(self.ytest, pred, output_dict=True)
         return report

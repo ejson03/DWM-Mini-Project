@@ -26,7 +26,6 @@ class linreg:
 
     def test(self):
         pred = self.clf.predict(self.xtest)
-        print(pred, metrics.mean_absolute_error(self.ytest, pred))
         return {
             'mae': metrics.mean_absolute_error(self.ytest, pred),
             'mse': metrics.mean_squared_error(self.ytest, pred),
