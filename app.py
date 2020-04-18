@@ -52,7 +52,7 @@ def upload(upload_name):
         else:
             abort(404)
 
-@app.route('/create', methods=["POST"])
+@app.route('/dataset', methods=["POST"])
 def createFrame():
     state = {}
     data = StringIO(request.json["data"], '\r')

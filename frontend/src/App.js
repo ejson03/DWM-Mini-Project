@@ -1,30 +1,32 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { LinRegAbout } from './components/lin-reg/about';
-import { LinRegTrain } from './components/lin-reg/train';
-import { LinRegTest } from './components/lin-reg/test';
-import { LinRegResult } from './components/lin-reg/result';
-import { LogRegAbout } from './components/log-reg/about';
-import { LogRegTrain } from './components/log-reg/train';
-import { LogRegTest } from './components/log-reg/test';
-import { LogRegResult } from './components/log-reg/result';
-import { SVMAbout } from './components/svm/about';
-import { SVMTrain } from './components/svm/train';
-import { SVMTest } from './components/svm/test';
-import { SVMResult } from './components/svm/result';
-import { NBAbout } from './components/nb/about';
-import { NBTrain } from './components/nb/train';
-import { NBTest } from './components/nb/test';
-import { NBResult } from './components/nb/result';
-import { KMeansAbout } from './components/k-means/about';
-import { KMeansTrain } from './components/k-means/train';
-import { KMeansTest } from './components/k-means/test';
-import { KMeansResult } from './components/k-means/result';
-import { NavBar } from './components/NavBar/NavBar';
-import HomePage from './components/home/homePage';
-import history from './components/history/history';
+import { LinRegAbout } from './component/linReg/About';
+import { LinRegTrain } from './component/linReg/Train';
+import { LinRegTest } from './component/linReg/Test';
+import { LinRegResult } from './component/linReg/Result';
+import { LogRegAbout } from './component/logReg/About';
+import { LogRegTrain } from './component/logReg/Train';
+import { LogRegTest } from './component/logReg/Test';
+import { LogRegResult } from './component/logReg/Result';
+import { SVMAbout } from './component/sVM/About';
+import { SVMTrain } from './component/sVM/Train';
+import { SVMTest } from './component/sVM/Test';
+import { SVMResult } from './component/sVM/Result';
+import { NBAbout } from './component/nB/About';
+import { NBTrain } from './component/nB/Train';
+import { NBTest } from './component/nB/Test';
+import { NBResult } from './component/nB/Result';
+import { KMeansAbout } from './component/kMeans/About';
+import { KMeansTrain } from './component/kMeans/Train';
+import { KMeansTest } from './component/kMeans/Test';
+import { KMeansResult } from './component/kMeans/Result';
+import ViewCSV from './component/viewCSV/ViewCSV';
+import { NavBar } from './component/navBar/NavBar';
+import HomePage from './component/home/HomePage';
+
+import history from './component/history/History';
 import './App.css';
-import CSV from './components/csv';
+
 export default class App extends Component {
     render() {
         return (
@@ -35,6 +37,9 @@ export default class App extends Component {
                         <Switch>
                             <Route path = "/" exact
                             component = { HomePage }
+                            />{" "}
+                            <Route path = "/dataset" exact
+                            component = { ViewCSV }
                             />{" "}
                             <Route path = "/lin-reg" exact 
                             component = { LinRegAbout }
