@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.bottompanel {
+  position: relative;
+}
+
+.filterbar {
+  position: absolute;
+  bottom: 0;
+}
+
+#Table {
+  background: #286a91;
+  color: white;
+}

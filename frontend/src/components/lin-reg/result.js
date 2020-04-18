@@ -5,32 +5,32 @@ import Grid from '@material-ui/core/Grid';
 import { PROXY_URL } from '../misc/proxyURL';
 import { MiniNavBar } from './navBar';
 import axios from 'axios';
-
+import CSV from '../csv';
 export class LinRegResult extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            result: []
-        };
-    };
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         result: []
+    //     };
+    // };
 
-    handleSubmit() {
-        axios.get(PROXY_URL + '/result/linreg')
-            .then(res => {
-                if(res.status === 200){
-                    console.log("SUCCESSS")
-                    console.log(res)
-                    this.setState({ result: res.data });
-                    console.log(this.state.result)
-                }else
-                    console.log("SOMETHING WENT WRONG")
-            })
-    }
+    // handleSubmit() {
+    //     axios.get(PROXY_URL + '/result/linreg')
+    //         .then(res => {
+    //             if(res.status === 200){
+    //                 console.log("SUCCESSS")
+    //                 console.log(res)
+    //                 this.setState({ result: res.data });
+    //                 console.log(this.state.result)
+    //             }else
+    //                 console.log("SOMETHING WENT WRONG")
+    //         })
+    // }
 
     render() {
         return (
             <div>
-                <MiniNavBar />
+                {/* <MiniNavBar />
                 <br /><br />
                 <Header size='huge'>
                     Linear Regression:
@@ -59,7 +59,8 @@ export class LinRegResult extends Component {
                         Result:
                     </Header>
                 </Grid>
-            </Grid>
+            </Grid> */}
+            <CSV />
         </div>
         );
     }

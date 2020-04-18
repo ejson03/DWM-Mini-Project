@@ -10,7 +10,7 @@ from modules.utils import formatFrame
 import os.path
 import json
 import os
-
+import pandas as pd
 app = Flask(__name__)
 if not os.path.exists("uploads"):
     os.makedirs("uploads")

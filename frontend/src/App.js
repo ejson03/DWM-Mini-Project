@@ -24,7 +24,7 @@ import { NavBar } from './components/NavBar/NavBar';
 import HomePage from './components/home/homePage';
 import history from './components/history/history';
 import './App.css';
-
+import CSV from './components/csv';
 export default class App extends Component {
     render() {
         return (
