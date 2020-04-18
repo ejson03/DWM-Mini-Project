@@ -23,8 +23,10 @@ export class SVMTrain extends Component {
             penalty: 'l2',
             c: '1',
             result: [],
-            uploadStatus: ''
+            uploadStatus: '',
+            showResult: false
         };
+        this.createResult = this.createResult.bind(this);
     };
 
     handleSubmit(e) {
@@ -43,12 +45,13 @@ export class SVMTrain extends Component {
                 console.log(res)
                 this.setState({ result: res.data });
             }else{
-                let uploadStatus = 'Something Went Wrong!';
+                let uploadStatus = '😱 Something Went Wrong!';
                 console.log(uploadStatus)
                 this.setState({ uploadStatus });
             }
         }).catch((error) => {
             let uploadStatus = error.toString( );
+            uploadStatus = uploadStatus + ' 😱';
             console.log(uploadStatus)
             this.setState({ uploadStatus });
           });
@@ -64,6 +67,10 @@ export class SVMTrain extends Component {
 
     onCChange(event) {
         this.setState({c: event.target.value})
+    }
+
+    createResult() {
+        this.setState({ showResult: true }) 
     }
 
     render() {
@@ -87,7 +94,7 @@ export class SVMTrain extends Component {
                     <br />
                     <form onSubmit={this.handleSubmit.bind(this)} method="POST">
                         <Button type="submit" value="Submit" style={{ width: '21%' }} variant="contained" color="primary">Train</Button>
-                        <br /><br /><br />
+                        <br /><br />
                         <Typography variant={"h6"} gutterBottom>
                             <b>{this.state.uploadStatus}</b>
                         </Typography>
@@ -141,6 +148,31 @@ export class SVMTrain extends Component {
                     <Header size = 'huge'>
                         Result:
                     </Header>
+                    <br />
+                    <Button style={{ width: '21%' }} variant="contained" color="primary" onClick={this.createResult}>Result</Button>
+                    <br /><br /><br />
+                    {this.state.showResult &&
+                        <Card
+                            style={{
+                                width: "95%",
+                                margin: '2.5%',
+                                transition: "0.3s",
+                                boxShadow: "0 12px 40px -12px rgba(0,0,0,0.3)",
+                                "&:hover": {
+                                boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
+                                }
+                            }}
+                            >
+                            <CardContent>
+                                <Typography id="coef" variant={"h6"}>
+                                    <b>Coef: </b>{this.state.result.coef}
+                                </Typography>
+                                <Typography id="intercept" variant={"h6"}>
+                                    <b>Intercept: </b>{this.state.result.intercept}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    }
                     <Card
                         style={{
                             width: "95%",

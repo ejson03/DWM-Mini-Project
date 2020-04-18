@@ -30,12 +30,13 @@ export class NBAbout extends Component {
                 console.log(uploadStatus)
                 this.setState({ uploadStatus });
             }else{
-                let uploadStatus = 'Something Went Wrong!';
+                let uploadStatus = '😱 Something Went Wrong!';
                 console.log(uploadStatus)
                 this.setState({ uploadStatus });
             }
         }).catch((error) => {
             let uploadStatus = error.toString( );
+            uploadStatus = uploadStatus + ' 😱';
             console.log(uploadStatus)
             this.setState({ uploadStatus });
           });

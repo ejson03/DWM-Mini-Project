@@ -26,12 +26,13 @@ export class LogRegTest extends Component {
                     console.log(res)
                     this.setState({ result: res.data });
                 }else{
-                    let uploadStatus = 'Something Went Wrong!';
+                    let uploadStatus = '😱 Something Went Wrong!';
                     console.log(uploadStatus)
                     this.setState({ uploadStatus });
                 }
             }).catch((error) => {
                 let uploadStatus = error.toString( );
+                uploadStatus = uploadStatus + ' 😱';
                 console.log(uploadStatus)
                 this.setState({ uploadStatus });
             });

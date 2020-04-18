@@ -13,7 +13,7 @@ export const MiniNavBar = _ => {
   return (
     <div>
       <Grid container spacing={0}>
-        <Grid item xs={3} md={3} xl={3} lg={3} style={{
+        <Grid item xs={4} md={4} xl={4} lg={4} style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center'
@@ -26,7 +26,7 @@ export const MiniNavBar = _ => {
               About
           </Button>
         </Grid>
-        <Grid item xs={3} md={3} xl={3} lg={3} style={{
+        <Grid item xs={4} md={4} xl={4} lg={4} style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center'
@@ -39,7 +39,7 @@ export const MiniNavBar = _ => {
               Train
           </Button>
         </Grid>
-        <Grid item xs={3} md={3} xl={3} lg={3} style={{
+        <Grid item xs={4} md={4} xl={4} lg={4} style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center'
@@ -50,19 +50,6 @@ export const MiniNavBar = _ => {
               onClick={()=>{pushLink('/nb/test')}}
               >
               Test
-          </Button>
-        </Grid>
-        <Grid item xs={3} md={3} xl={3} lg={3} style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-        }}>
-          <Button
-              variant="contained"
-              color="primary"
-              onClick={()=>{pushLink('/nb/result')}}
-              >
-              Result
           </Button>
         </Grid>
       </Grid> 
