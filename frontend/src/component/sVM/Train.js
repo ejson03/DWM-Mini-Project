@@ -164,6 +164,9 @@ export class SVMTrain extends Component {
                             }}
                             >
                             <CardContent>
+                                <Typography id="classes" variant={"h6"} gutterBottom>
+                                    <b>Classes: </b>{this.state.result.classes}
+                                </Typography>
                                 <Typography id="coef" variant={"h6"}>
                                     <b>Coef: </b>{this.state.result.coef}
                                 </Typography>
@@ -173,29 +176,6 @@ export class SVMTrain extends Component {
                             </CardContent>
                         </Card>
                     }
-                    <Card
-                        style={{
-                            width: "95%",
-                            margin: '2.5%',
-                            transition: "0.3s",
-                            boxShadow: "0 12px 40px -12px rgba(0,0,0,0.3)",
-                            "&:hover": {
-                            boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
-                            }
-                        }}
-                        >
-                        <CardContent>
-                            <Typography id="classes" variant={"h6"} gutterBottom>
-                                <b>Classes: </b>{this.state.result.classes}
-                            </Typography>
-                            <Typography id="coef" variant={"h6"}>
-                                <b>Coef: </b>{this.state.result.coef}
-                            </Typography>
-                            <Typography id="intercept" variant={"h6"}>
-                                <b>Intercept: </b>{this.state.result.intercept}
-                            </Typography>
-                        </CardContent>
-                    </Card>
                 </Grid>
             </Grid>
         </div>

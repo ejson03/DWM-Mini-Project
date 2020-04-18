@@ -112,7 +112,7 @@ export class LinRegTrain extends Component {
                     <br />
                     <Button style={{ width: '21%' }} variant="contained" color="primary" onClick={this.createResult}>Result</Button>
                     <br /><br /><br />
-                    {this.state.showResult &&
+                    {this.state.showResult &&   
                         <Card
                             style={{
                                 width: "95%",

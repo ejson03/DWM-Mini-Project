@@ -124,38 +124,18 @@ export class KMeansTrain extends Component {
                             }}
                             >
                             <CardContent>
-                                <Typography id="coef" variant={"h6"}>
-                                    <b>Coef: </b>{this.state.result.coef}
+                                <Typography variant={"h6"} gutterBottom>
+                                    <b>Centers: </b>{this.state.result.centers}
                                 </Typography>
-                                <Typography id="intercept" variant={"h6"}>
-                                    <b>Intercept: </b>{this.state.result.intercept}
+                                <Typography variant={"h6"}>
+                                    <b>Labels: </b>{this.state.result.labels}
+                                </Typography>
+                                <Typography variant={"h6"}>
+                                    <b>Preds: </b>{this.state.result.preds}
                                 </Typography>
                             </CardContent>
                         </Card>
                     }
-                    <Card
-                        style={{
-                            width: "95%",
-                            margin: '2.5%',
-                            transition: "0.3s",
-                            boxShadow: "0 12px 40px -12px rgba(0,0,0,0.3)",
-                            "&:hover": {
-                            boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
-                            }
-                        }}
-                        >
-                        <CardContent>
-                            <Typography variant={"h6"} gutterBottom>
-                                <b>Centers: </b>{this.state.result.centers}
-                            </Typography>
-                            <Typography variant={"h6"}>
-                                <b>Labels: </b>{this.state.result.labels}
-                            </Typography>
-                            <Typography variant={"h6"}>
-                                <b>Preds: </b>{this.state.result.preds}
-                            </Typography>
-                        </CardContent>
-                    </Card>
                 </Grid>
             </Grid>
         </div>
