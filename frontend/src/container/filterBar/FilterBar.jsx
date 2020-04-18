@@ -26,7 +26,7 @@ class FilterBar extends Component {
 
     render() {
         return this.state.clicked ? (
-            <div className="w-100 center fixed bottom-0 bg-light-blue container-fluid">
+            <div className="w-97 center fixed bottom-0 bg-custom text-white container-fluid">
                 <div className="row pointer ba" onClick={this.collapse}>
                     <h5 className="center">Collapse</h5>
                 </div>
@@ -79,7 +79,7 @@ class FilterBar extends Component {
             </div>
         ) : (
             <div
-                className="w-100 center fixed bottom-0 bg-light-blue container-fluid pointer"
+                className="w-97 center fixed bottom-0 bg-custom text-white container-fluid pointer"
                 onClick={this.collapse}
             >
                 <h1 className="center">Filter Options</h1>

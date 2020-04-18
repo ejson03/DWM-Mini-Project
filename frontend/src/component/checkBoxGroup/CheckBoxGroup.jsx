@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import CheckBox from "rc-checkbox";
 import "bootstrap/dist/css/bootstrap.min.css";
 

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import YouTube from 'react-youtube';
 import { Header } from 'semantic-ui-react';
 import Button from '@material-ui/core/Button';
-import { PROXY_URL } from '../misc/proxyURL';
+import Typography from '@material-ui/core/Typography';
+import { PROXY_URL } from '../misc/ProxyURL';
 import { MiniNavBar } from './NavBar';
 
 export class SVMAbout extends Component {
@@ -66,7 +67,7 @@ export class SVMAbout extends Component {
                     <div>
                         <Button
                             type = "submit"
-                            valud = "Submit"
+                            value = "Submit"
                             variant = "contained"
                             color = "primary"
                             style={{ width: '10%' }}
@@ -76,6 +77,9 @@ export class SVMAbout extends Component {
                     </div>
                 </form>
                 <br />
+                <Typography variant={"h6"} gutterBottom>
+                    <b>{this.state.uploadStatus}</b>
+                </Typography>
                 <Header size='huge'>
                     Support Vector Machine Background/Explanation:
                 </Header>

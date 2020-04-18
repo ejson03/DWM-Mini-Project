@@ -86,7 +86,7 @@ export class NBTrain extends Component {
                         <Typography variant={"h6"} gutterBottom>
                             <b>{this.state.uploadStatus}</b>
                         </Typography>
-                        <br/>
+                        <br/><br />
                         <div>
                             <TextField
                                 id="testSplit"

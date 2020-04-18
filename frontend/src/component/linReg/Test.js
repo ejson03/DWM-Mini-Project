@@ -59,10 +59,10 @@ export class LinRegTest extends Component {
                     <form onSubmit={this.handleSubmit.bind(this)} method="GET">
                         <Button type="submit" value="Submit" style={{ width: '21%' }} variant="contained" color="primary">Test</Button>
                     </form>
+                    <br/><br/>
                     <Typography variant={"h6"} gutterBottom>
                         <b>{this.state.uploadStatus}</b>
                     </Typography>
-                    <br/>
                 </Grid>
                 <Grid item xs={6} style={{
                     display: 'flex',

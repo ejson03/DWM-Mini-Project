@@ -3,7 +3,7 @@ import YouTube from 'react-youtube';
 import { Header } from 'semantic-ui-react';
 import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
-import { PROXY_URL } from '../misc/proxyURL';
+import { PROXY_URL } from '../misc/ProxyURL';
 import { MiniNavBar } from './NavBar';
 
 export class KMeansAbout extends Component {
@@ -67,7 +67,7 @@ export class KMeansAbout extends Component {
                     <div>
                         <Button
                             type = "submit"
-                            valud = "Submit"
+                            value = "Submit"
                             variant = "contained"
                             color = "primary"
                             style={{ width: '10%' }}
@@ -75,12 +75,11 @@ export class KMeansAbout extends Component {
                             Upload
                         </Button>
                     </div>
-                    <br/>
-                    <Typography variant={"h6"} gutterBottom>
-                        <b>{this.state.uploadStatus}</b>
-                    </Typography>
                 </form>
-                <br />
+                <br/>
+                <Typography variant={"h6"} gutterBottom>
+                    <b>{this.state.uploadStatus}</b>
+                </Typography>
                 <Header size='huge'>
                     K-Means Clustering Background/Explanation:
                 </Header>

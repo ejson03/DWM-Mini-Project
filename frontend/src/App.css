@@ -5,4 +5,13 @@
 .main-content {
 	margin-top: 2rem !important;
 	margin-left: 2rem !important;
+	margin-right: 2rem !important;
+}
+
+.bg-custom {
+    background: #3f51b5;
+}
+
+.w-97 {
+	width: 97%;
 }
