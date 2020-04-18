@@ -1,8 +1,8 @@
-# EHR
+# ML Dahboard
 Dashboard for intearctive machine learning experience
 View the webapp on :
-[Heroku](https://ess-ml-dashboard.herokuapp.com/)
-[Github Pages](http://ejson03.github.io/DWM-Mini-Project)
+* [Heroku](https://ess-ml-dashboard.herokuapp.com/)
+* [Github Pages](http://ejson03.github.io/DWM-Mini-Project)
 
 # Table of Contents
 
