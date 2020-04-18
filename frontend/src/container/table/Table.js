@@ -17,7 +17,7 @@ class Table extends Component {
                 columns={this.props.columns}
                 column={columnDefaults}
                 style={{
-                    height: "800px" //This will force the table body to overflow and scroll, since there is not enough room
+                    height: "750px" //This will force the table body to overflow and scroll, since there is not enough room
                 }}
                 className="-striped -highlight pa3"
             />

@@ -112,6 +112,7 @@ export class KMeansTrain extends Component {
                     <Button style={{ width: '21%' }} variant="contained" color="primary" onClick={this.createResult}>Result</Button>
                     <br /><br /><br />
                     {this.state.showResult &&
+                        
                         <Card
                             style={{
                                 width: "95%",
