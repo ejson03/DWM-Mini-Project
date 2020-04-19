@@ -1,8 +1,8 @@
 {
   "main.css": "static/css/main.9b048f5d.css",
   "main.css.map": "static/css/main.9b048f5d.css.map",
-  "main.js": "static/js/main.889d1642.js",
-  "main.js.map": "static/js/main.889d1642.js.map",
+  "main.js": "static/js/main.94d31b20.js",
+  "main.js.map": "static/js/main.94d31b20.js.map",
   "static\\media\\KaTeX_AMS-Regular.ttf": "static/media/KaTeX_AMS-Regular.c67be87a.ttf",
   "static\\media\\KaTeX_AMS-Regular.woff": "static/media/KaTeX_AMS-Regular.ac1d46d9.woff",
   "static\\media\\KaTeX_AMS-Regular.woff2": "static/media/KaTeX_AMS-Regular.3d8245dc.woff2",
@@ -60,6 +60,7 @@
   "static\\media\\KaTeX_Typewriter-Regular.ttf": "static/media/KaTeX_Typewriter-Regular.6b9645af.ttf",
   "static\\media\\KaTeX_Typewriter-Regular.woff": "static/media/KaTeX_Typewriter-Regular.ba01f72a.woff",
   "static\\media\\KaTeX_Typewriter-Regular.woff2": "static/media/KaTeX_Typewriter-Regular.f43e8696.woff2",
+  "static\\media\\bg.png": "static/media/bg.c0931f28.png",
   "static\\media\\brand-icons.eot": "static/media/brand-icons.13db00b7.eot",
   "static\\media\\brand-icons.svg": "static/media/brand-icons.a1a749e8.svg",
   "static\\media\\brand-icons.ttf": "static/media/brand-icons.c5ebe0b3.ttf",
