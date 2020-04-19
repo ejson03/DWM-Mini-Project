@@ -11,11 +11,13 @@ import os.path
 import json
 import os
 import pandas as pd
-app = Flask(__name__)
+
+
+app = Flask(__name__, static_folder = "./frontend/static", template_folder="./frontend")
 if not os.path.exists("uploads"):
     os.makedirs("uploads")
 
-session = {}
+file_det = {}
 
 algos = {
     'svm': svm,
@@ -26,14 +28,14 @@ algos = {
 }
 services = ['uploads', 'train', 'test']
 
-cors = CORS(app)
-# , resources={
-#     r'/{}/{}'.format(service,algo): {"origins": "*"} for service in services for algo in algos
-# }, expose_headers='Authorization')
+cors = CORS(app, resources={
+    r'/{}/{}'.format(service,algo): {"origins": "*"} for service in services for algo in algos
+}, expose_headers='Authorization')
+
 
 @app.route('/', methods=['GET'])
 def test():
-    return "Interactive ML App Server"
+    return render_template("index.html")
 
 exts = ['csv', 'json', 'yaml', 'yml']
 @app.route('/uploads/<string:upload_name>', methods=['POST'])
@@ -45,8 +47,8 @@ def upload(upload_name):
             if not os.path.exists(f'uploads/{upload_name}'):
                 os.makedirs(f'uploads/{upload_name}')
             data.save(f'uploads/{upload_name}/{data.filename}')
-            session[f'{upload_name}_path'] = f'uploads/{upload_name}/{data.filename}'
-            session[f'{upload_name}_type'] = ext
+            file_det[f'{upload_name}_path'] = f'uploads/{upload_name}/{data.filename}'
+            file_det[f'{upload_name}_type'] = ext
             return jsonify({'response': 'File uploaded success!'})
         else:
             abort(404)
@@ -69,9 +71,7 @@ def train(train_name):
     params = request.get_json()
     print(params)
     algo = service_class()
-    session[f'{train_name}'] = algo
-    train = algo.train(session[f'{train_name}_path'], session[f'{train_name}_type'],params)
-    print(session)
+    train = algo.train(file_det[f'{train_name}_path'], file_det[f'{train_name}_type'],params)
     print(train)
     return train
 
@@ -83,9 +83,9 @@ def testroute(test_name):
         # service does not exist
         return None, 401
     
-    algo = session[f'{test_name}']
+    algo = service_class()
+    print(test_name)
     test = algo.test()
-    print(test)
     return jsonify(test)
 
 
