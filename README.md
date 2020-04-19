@@ -3,11 +3,11 @@ Welcome to our Interactive ML App!
 Using this app, you aan
 * Visualise the uploaded dataset
 * Apply various ML algorithms like
- * Linear Regression
- * Logistic Regression
- * Support Vector Machine
- * Naive Bayes
- * K-Means Clustering
+  * Linear Regression
+  * Logistic Regression
+  * Support Vector Machine
+  * Naive Bayes
+  * K-Means Clustering
 
 # ML Dashboard
 Dashboard for intearctive machine learning experience
