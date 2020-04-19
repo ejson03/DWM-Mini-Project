@@ -189,6 +189,7 @@ class ViewCSV extends Component {
                     active={this.state.activeTab}
                     style={{ zIndex: 1 }}
                 />
+                <br />
                 {this.state.openFile !== "" ? (
                     <Scroll className="absolute pa5 row pagination-centered">
                         <AnalyticContatiner
@@ -210,6 +211,7 @@ class ViewCSV extends Component {
                         <FileCard onSubmit={this.uploadFile}/>
                     </div>
                 )}
+                <br /><br /><br />
                 <div className="w-100 row">
                     <FilterBar
                         visibleColumns={this.state.visbleColumns}

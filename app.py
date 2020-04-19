@@ -31,10 +31,9 @@ cors = CORS(app)
 #     r'/{}/{}'.format(service,algo): {"origins": "*"} for service in services for algo in algos
 # }, expose_headers='Authorization')
 
-
 @app.route('/', methods=['GET'])
 def test():
-    return "Hello"
+    return "Interactive ML App Server"
 
 exts = ['csv', 'json', 'yaml', 'yml']
 @app.route('/uploads/<string:upload_name>', methods=['POST'])

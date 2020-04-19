@@ -26,12 +26,12 @@ export const NavBar = _ => {
       <AppBar position="static">
         <Toolbar variant="dense">
           <Typography variant="h6" color="inherit">
-            Machine Learning
+            <img src="/logo.png" alt="Logo" height="88" width="88" /> Interactive Machine Learning
           </Typography>
         </Toolbar>
         <div>
           <Button style={{ width: '14.25%' }} color="inherit" onClick={()=>{pushLink('/')}}>Home</Button>
-          <Button style={{ width: '14.25%' }} color="inherit" onClick={()=>{pushLink('/dataset')}}>Dataset</Button>
+          <Button style={{ width: '14.25%' }} color="inherit" onClick={()=>{pushLink('/view-dataset')}}>View Dataset</Button>
           <Button style={{ width: '14.25%' }} color="inherit" onClick={()=>{pushLink('/lin-reg')}}>Linear Regression</Button>
           <Button style={{ width: '14.25%' }} color="inherit" onClick={()=>{pushLink('/log-reg')}}>Logistic Regression</Button>
           <Button style={{ width: '14.25%' }} color="inherit" onClick={()=>{pushLink('/svm')}}>Support Vector Machine</Button>

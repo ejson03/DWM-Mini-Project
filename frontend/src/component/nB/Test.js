@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from "@material-ui/core/Typography";
 import { PROXY_URL } from '../misc/ProxyURL';
 import { MiniNavBar } from './NavBar';
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import axios from 'axios';
 
 export class NBTest extends Component {
@@ -12,11 +14,15 @@ export class NBTest extends Component {
         super(props);
         this.state = {
             result: [],
-            uploadStatus: ''
+            uploadStatus: '',
+            showResult: false
         };
+        this.createResult = this.createResult.bind(this);
     };
 
-    handleSubmit() {
+    handleSubmit(e) {
+        e.preventDefault();
+        
         axios.get(PROXY_URL + '/test/nb')
             .then((res) => {
                 if(res.status === 200){
@@ -36,6 +42,10 @@ export class NBTest extends Component {
                 console.log(uploadStatus)
                 this.setState({ uploadStatus });
             });
+    }
+
+    createResult() {
+        this.setState({ showResult: true }) 
     }
 
     render() {
@@ -60,6 +70,7 @@ export class NBTest extends Component {
                     <form onSubmit={this.handleSubmit.bind(this)} method="GET">
                         <Button type="submit" value="Submit" style={{ width: '21%' }} variant="contained" color="primary">Test</Button>
                     </form>
+                    <br />
                     <Typography variant={"h6"} gutterBottom>
                         <b>{this.state.uploadStatus}</b>
                     </Typography>
@@ -73,6 +84,130 @@ export class NBTest extends Component {
                     <Header size = 'huge'>
                         Result:
                     </Header>
+                    <br />
+                    <Button style={{ width: '21%' }} variant="contained" color="primary" onClick={this.createResult}>Result</Button>
+                    <br /><br /><br />
+                    {this.state.showResult &&
+                        <Card
+                            style={{
+                                width: "95%",
+                                margin: '2.5%',
+                                transition: "0.3s",
+                                boxShadow: "0 12px 40px -12px rgba(0,0,0,0.3)",
+                                "&:hover": { boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)" }
+                            }}
+                        >
+                            <CardContent>
+                                <Typography variant={"h6"} gutterBottom>
+                                    <b>Accuracy: </b>{this.state.result.accuracy}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    }
+                    <br />
+                    {this.state.showResult &&
+                        <Card
+                            style={{
+                                width: "95%",
+                                margin: '2.5%',
+                                transition: "0.3s",
+                                boxShadow: "0 12px 40px -12px rgba(0,0,0,0.3)",
+                                "&:hover": { boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)" }
+                            }}
+                        >
+                            <CardContent>
+                                <Typography variant={"h6"} gutterBottom>
+                                    <b>Macro Average:</b>
+                                    <br />
+                                    <b>F1-Score: </b>{this.state.result['macro avg']['f1-score']}
+                                    <br />
+                                    <b>Precision: </b>{this.state.result['macro avg'].precision}
+                                    <br />
+                                    <b>Recall: </b>{this.state.result['macro avg'].recall}
+                                    <br />
+                                    <b>Support: </b>{this.state.result['macro avg'].support}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    }
+                    <br />
+                    {this.state.showResult &&   
+                        <Card
+                            style={{
+                                width: "95%",
+                                margin: '2.5%',
+                                transition: "0.3s",
+                                boxShadow: "0 12px 40px -12px rgba(0,0,0,0.3)",
+                                "&:hover": { boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)" }
+                            }}
+                            >
+                            <CardContent>
+                                <Typography variant={"h6"} gutterBottom>
+                                    <b>No:</b>
+                                    <br />
+                                    <b>F1-Score: </b>{this.state.result.no['f1-score']}
+                                    <br />
+                                    <b>Precision: </b>{this.state.result.no.precision}
+                                    <br />
+                                    <b>Recall: </b>{this.state.result.no.recall}
+                                    <br />
+                                    <b>Support: </b>{this.state.result.no.support}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    }
+                    <br />
+                    {this.state.showResult &&
+                        <Card
+                            style={{
+                                width: "95%",
+                                margin: '2.5%',
+                                transition: "0.3s",
+                                boxShadow: "0 12px 40px -12px rgba(0,0,0,0.3)",
+                                "&:hover": { boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)" }
+                            }}
+                        >
+                            <CardContent>
+                                <Typography variant={"h6"} gutterBottom>
+                                    <b>Weighted Avg:</b>
+                                    <br />
+                                    <b>F1-Score: </b>{this.state.result['weighted avg']['f1-score']}
+                                    <br />
+                                    <b>Precision: </b>{this.state.result['weighted avg'].precision}
+                                    <br />
+                                    <b>Recall: </b>{this.state.result['weighted avg'].recall}
+                                    <br />
+                                    <b>Support: </b>{this.state.result['weighted avg'].support}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    }
+                    <br />
+                    {this.state.showResult &&
+                        <Card
+                            style={{
+                                width: "95%",
+                                margin: '2.5%',
+                                transition: "0.3s",
+                                boxShadow: "0 12px 40px -12px rgba(0,0,0,0.3)",
+                                "&:hover": { boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)" }
+                            }}
+                        >
+                            <CardContent>
+                                <Typography variant={"h6"} gutterBottom>
+                                    <b>Yes:</b>
+                                    <br />
+                                    <b>F1-Score: </b>{this.state.result.yes['f1-score']}
+                                    <br />
+                                    <b>Precision: </b>{this.state.result.yes.precision}
+                                    <br />
+                                    <b>Recall: </b>{this.state.result.yes.recall}
+                                    <br />
+                                    <b>Support: </b>{this.state.result.yes.support}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    }
                 </Grid>
             </Grid>
         </div>

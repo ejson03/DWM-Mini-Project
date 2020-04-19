@@ -13,7 +13,7 @@ export const MiniNavBar = _ => {
   return (
     <div>
       <Grid container spacing={0}>
-        <Grid item xs={4} md={4} xl={4} lg={4} style={{
+        <Grid item xs={6} md={6} xl={6} lg={6} style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center'
@@ -26,7 +26,7 @@ export const MiniNavBar = _ => {
               About
           </Button>
         </Grid>
-        <Grid item xs={4} md={4} xl={4} lg={4} style={{
+        <Grid item xs={6} md={6} xl={6} lg={6} style={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center'
@@ -37,19 +37,6 @@ export const MiniNavBar = _ => {
               onClick={()=>{pushLink('/k-means/train')}}
               >
               Train
-          </Button>
-        </Grid>
-        <Grid item xs={4} md={4} xl={4} lg={4} style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
-        }}>
-          <Button
-              variant="contained"
-              color="primary"
-              onClick={()=>{pushLink('/k-means/test')}}
-              >
-              Test
           </Button>
         </Grid>
       </Grid> 

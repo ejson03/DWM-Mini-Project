@@ -1,5 +1,4 @@
 import React from 'react';
-import { Header } from 'semantic-ui-react';
 import './HomePage.css';
 
 class HomePage extends React.Component {
@@ -7,12 +6,7 @@ class HomePage extends React.Component {
     render() {
         return (
             <div className = 'home-page'>
-                <Header size = 'huge'>
-                    ABC!
-                </Header>
-                <Header size = 'huge'>
-                    XYZ
-                </Header>
+                <img className="imgCenter" src="bg.png" alt="Background" width="62%" height="62%" />    
             </div>
         );
     }

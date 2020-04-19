@@ -14,11 +14,9 @@ import { NBTrain } from './component/nB/Train';
 import { NBTest } from './component/nB/Test';
 import { KMeansAbout } from './component/kMeans/About';
 import { KMeansTrain } from './component/kMeans/Train';
-import { KMeansTest } from './component/kMeans/Test';
 import ViewCSV from './component/viewCSV/ViewCSV';
 import { NavBar } from './component/navBar/NavBar';
 import HomePage from './component/home/HomePage';
-
 import history from './component/history/History';
 import './App.css';
 
@@ -33,7 +31,7 @@ export default class App extends Component {
                             <Route path = "/" exact
                             component = { HomePage }
                             />{" "}
-                            <Route path = "/dataset" exact
+                            <Route path = "/view-dataset" exact
                             component = { ViewCSV }
                             />{" "}
                             <Route path = "/lin-reg" exact 
@@ -77,9 +75,6 @@ export default class App extends Component {
                             />{" "}
                             <Route path = "/k-means/train" exact 
                             component = { KMeansTrain }
-                            />{" "}
-                            <Route path = "/k-means/test" exact 
-                            component = { KMeansTest }
                             />{" "}
                         </Switch>{" "}
                     </div>{" "} 

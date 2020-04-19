@@ -119,19 +119,15 @@ export class KMeansTrain extends Component {
                                 margin: '2.5%',
                                 transition: "0.3s",
                                 boxShadow: "0 12px 40px -12px rgba(0,0,0,0.3)",
-                                "&:hover": {
-                                boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
-                                }
+                                "&:hover": { boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)" }
                             }}
                             >
                             <CardContent>
                                 <Typography variant={"h6"} gutterBottom>
                                     <b>Centers: </b>{this.state.result.centers}
-                                </Typography>
-                                <Typography variant={"h6"}>
+                                    <br />
                                     <b>Labels: </b>{this.state.result.labels}
-                                </Typography>
-                                <Typography variant={"h6"}>
+                                    <br />
                                     <b>Preds: </b>{this.state.result.preds}
                                 </Typography>
                             </CardContent>

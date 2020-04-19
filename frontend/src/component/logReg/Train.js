@@ -164,13 +164,11 @@ export class LogRegTrain extends Component {
                             }}
                             >
                             <CardContent>
-                                <Typography id="classes" variant={"h6"} gutterBottom>
+                                <Typography variant={"h6"} gutterBottom>
                                     <b>Classes: </b>{this.state.result.classes}
-                                </Typography>
-                                <Typography id="coef" variant={"h6"}>
+                                    <br />
                                     <b>Coef: </b>{this.state.result.coef}
-                                </Typography>
-                                <Typography id="intercept" variant={"h6"}>
+                                    <br />
                                     <b>Intercept: </b>{this.state.result.intercept}
                                 </Typography>
                             </CardContent>
