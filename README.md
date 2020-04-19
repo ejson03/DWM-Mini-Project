@@ -1,4 +1,6 @@
-# ML Dahboard
+# Interactive ML App
+
+# ML Dashboard
 Dashboard for intearctive machine learning experience
 View the webapp on :
 * [Heroku](https://ess-ml-dashboard.herokuapp.com/)
