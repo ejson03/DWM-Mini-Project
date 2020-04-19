@@ -7,6 +7,7 @@ import numpy as np
 from scipy import stats
 from flask import session
 from sklearn.preprocessing import LabelEncoder
+import json
 
 def load_data(filepath, fileext):
     
