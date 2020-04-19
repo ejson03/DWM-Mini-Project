@@ -25,7 +25,7 @@ Hyperparameter support for training.
 
 Clone the repository
 ```
-git clone https://github.com/ejson03/EHR-On-Bigchain.git
+git clone https://github.com/ejson03/
 ```
 
 Setup Frontend
