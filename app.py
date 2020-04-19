@@ -41,6 +41,7 @@ def test():
 exts = ['csv', 'json', 'yaml', 'yml']
 @app.route('/uploads/<string:upload_name>', methods=['POST'])
 def upload(upload_name):
+    print(upload_name)
     if request.method == 'POST':
         data = request.files['file']
         ext = data.filename.split('.')[1]
@@ -50,6 +51,7 @@ def upload(upload_name):
             data.save(f'uploads/{upload_name}/{data.filename}')
             session[f'{upload_name}_path'] = f'uploads/{upload_name}/{data.filename}'
             session[f'{upload_name}_type'] = ext
+            print(session)
             return jsonify({'response': 'File uploaded success!'})
         else:
             abort(404)
@@ -63,6 +65,7 @@ def createFrame():
 
 @app.route('/train/<string:train_name>', methods=['POST'])
 def train(train_name):
+    print(train_name)
     try:
         service_class = algos[train_name]
     except:
@@ -70,25 +73,18 @@ def train(train_name):
         return None, 401
     
     params = request.get_json()
-    print(params)
     algo = service_class()
     session[f'{train_name}'] = algo
-    train = algo.train(session[f'{train_name}_path'], session[f'{train_name}_type'],params)
     print(session)
-    print(train)
+    train = algo.train(session[f'{train_name}_path'], session[f'{train_name}_type'],params)
     return train
 
 @app.route('/test/<string:test_name>', methods=['GET'])
 def testroute(test_name):
-    try:
-        service_class = algos[test_name]
-    except:
-        # service does not exist
-        return None, 401
-    
+    print(test_name)
+    print(session)   
     algo = session[f'{test_name}']
     test = algo.test()
-    print(test)
     return jsonify(test)
 
 
