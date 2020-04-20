@@ -12,11 +12,13 @@ class Session():
             f"{algo}_ext": ext
         } 
         if(object != None):
-            self.vars[self.id][f"{algo}"] = object
+            main = self.vars[self.id]
+            main[f"{algo}"] = object
         
 
     def get(self, key):
-        return self.vars[self.id][key]
+        main = self.vars[self.id]
+        return main[key]
 
     def __str__(self):
         return str(self.vars[self.id])
