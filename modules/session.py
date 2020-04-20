@@ -9,18 +9,19 @@ class Session():
 
     def set(self, algo, path=None, ext=None, object=None):
         if(path != None):
-            main = self.vars[self.id]
-            main[f"{algo}_path"] =  path,
-            main[f"{algo}_ext"] =  ext
+            self.vars[self.id][f"{algo}_path"] = path
+            self.vars[self.id][f"{algo}_ext"] =  ext
+            print(self.vars)
         
         if(object != None):
-            main = self.vars[self.id]
-            main[f"{algo}"] = object
+            self.vars[self.id][f"{algo}"] = object
+            print(self.vars)
         
 
     def get(self, key):
-        main = self.vars[self.id]
-        return main[key]
+        print(self.vars)
+        return self.vars[self.id][key]
+
 
     def __str__(self):
         return str(self.vars[self.id])
