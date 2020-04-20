@@ -7,17 +7,16 @@ from flask import Flask, request, jsonify, render_template, abort
 from flask_cors import CORS
 from io import StringIO
 from modules.utils import formatFrame
+from modules.session import Session
 import os.path
 import json
 import os
 import pandas as pd
 
-
+sess = Session()
 app = Flask(__name__, static_folder = "./frontend/static", template_folder="./frontend")
 if not os.path.exists("uploads"):
     os.makedirs("uploads")
-
-global session = {}
 
 algos = {
     'svm': svm,
@@ -49,9 +48,9 @@ def upload(upload_name):
             if not os.path.exists(f'uploads/{upload_name}'):
                 os.makedirs(f'uploads/{upload_name}')
             data.save(f'uploads/{upload_name}/{data.filename}')
-            session[f'{upload_name}_path'] = f'uploads/{upload_name}/{data.filename}'
-            session[f'{upload_name}_type'] = ext
-            print(session)
+            path = f'uploads/{upload_name}/{data.filename}'
+            sess.set(algo = upload_name,path=path,ext = ext) 
+            print(sess)
             return jsonify({'response': 'File uploaded success!'})
         else:
             abort(404)
@@ -74,16 +73,18 @@ def train(train_name):
     
     params = request.get_json()
     algo = service_class()
-    session[f'{train_name}'] = algo
-    print(session)
-    train = algo.train(session[f'{train_name}_path'], session[f'{train_name}_type'],params)
+    path = sess.get(f'{train_name}_path')
+    ext = sess.get(f'{train_name}_ext')
+    sess.set(algo=train_name, object=algo)
+    print(sess)
+    train = algo.train(path, ext ,params)
     return train
 
 @app.route('/test/<string:test_name>', methods=['GET'])
 def testroute(test_name):
     print(test_name)
-    print(session)   
-    algo = session[f'{test_name}']
+    print(sess)   
+    algo = sess.get(f'{test_name}')
     test = algo.test()
     return jsonify(test)
 
