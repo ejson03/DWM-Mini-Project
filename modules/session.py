@@ -19,5 +19,4 @@ class Session():
         return self.vars[self.id][key]
 
     def __str__(self):
-        for key, val in self.vars[self.id]:
-            print(key, val)
+        print(self.var[self.id])
