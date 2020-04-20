@@ -17,7 +17,7 @@ app = Flask(__name__, static_folder = "./frontend/static", template_folder="./fr
 if not os.path.exists("uploads"):
     os.makedirs("uploads")
 
-session = {}
+global session 
 
 algos = {
     'svm': svm,
