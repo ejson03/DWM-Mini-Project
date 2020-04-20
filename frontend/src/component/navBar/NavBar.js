@@ -26,7 +26,7 @@ export const NavBar = _ => {
       <AppBar position="static">
         <Toolbar variant="dense">
           <Typography variant="h6" color="inherit">
-            <img src={require('./logo.png')} alt="Logo" height="88" width="88" /> Interactive Machine Learning
+            <img src={ require('../../images/logo.png') } alt="Logo" height="88" width="88" /> Interactive Machine Learning
           </Typography>
         </Toolbar>
         <div>
