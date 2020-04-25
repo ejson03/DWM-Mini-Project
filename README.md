@@ -36,7 +36,7 @@ Hyperparameter support for training.
 
 Clone the repository
 ```
-git clone https://github.com/ejson03/
+git clone https://github.com/ejson03/DWM-Mini-Project
 ```
 
 Setup Frontend
@@ -62,7 +62,7 @@ python app.py
 
 Open a browser and go to 
 ```
-http://localhost:3080
+http://localhost:3000
 ```
 # Contributors
 
