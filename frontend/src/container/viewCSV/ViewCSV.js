@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import TabBar from "../../container/tabBar/TabBar";
-import AnalyticContatiner from "../../container/analyticContainer/AnalyticContainer";
-import FileCard from "../fileCard/FileCard";
-import Scroll from "../../container/scroll/Scroll";
+import TabBar from "../tabBar/TabBar";
+import AnalyticContatiner from "../analyticContainer/AnalyticContainer";
+import FileCard from "../../component/fileCard/FileCard";
+import Scroll from "../scroll/Scroll";
 import matchSorter from "match-sorter";
-import FilterBar from "../../container/filterBar/FilterBar";
-import { PROXY_URL } from '../misc/ProxyURL';
+import FilterBar from "../filterBar/FilterBar";
+import { PROXY_URL } from '../../component/misc/ProxyURL';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './ViewCSV.css';
 import "tachyons";

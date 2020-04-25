@@ -52,6 +52,19 @@ export const MiniNavBar = _ => {
               Test
           </Button>
         </Grid>
+        <Grid item xs={4} md={4} xl={4} lg={4} style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+        }}>
+          <Button
+              variant="contained"
+              color="primary"
+              onClick={()=>{pushLink('/log-reg/visualize')}}
+              >
+              Visualize
+          </Button>
+        </Grid>
       </Grid> 
     </div>      
   );

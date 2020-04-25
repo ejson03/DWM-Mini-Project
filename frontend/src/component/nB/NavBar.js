@@ -52,6 +52,7 @@ export const MiniNavBar = _ => {
               Test
           </Button>
         </Grid>
+     
       </Grid> 
     </div>      
   );

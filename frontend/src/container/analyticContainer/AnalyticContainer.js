@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Table from "../table/Table";
 import Graphs from "../graphs/Graphs";
-import Stats from "../stats/Stats";
 
 class AnalyticContainer extends Component {
     render() {
@@ -15,8 +14,6 @@ class AnalyticContainer extends Component {
                     />
                 </div>
             );
-        } else if (this.props.activeTab === "Stats") {
-            return <Stats />;
         } else if (this.props.activeTab === "Graphs") {
             return <Graphs />;
         }

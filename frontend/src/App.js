@@ -14,7 +14,7 @@ import { NBTrain } from './component/nB/Train';
 import { NBTest } from './component/nB/Test';
 import { KMeansAbout } from './component/kMeans/About';
 import { KMeansTrain } from './component/kMeans/Train';
-import ViewCSV from './component/viewCSV/ViewCSV';
+import ViewCSV from './container/viewCSV/ViewCSV';
 import { NavBar } from './component/navBar/NavBar';
 import HomePage from './component/home/HomePage';
 import history from './component/history/History';
@@ -43,6 +43,7 @@ export default class App extends Component {
                             <Route path = "/lin-reg/test" exact 
                             component = { LinRegTest }
                             />{" "}
+                
                             <Route path = "/log-reg" exact 
                             component = { LogRegAbout }
                             />{" "}
@@ -52,6 +53,7 @@ export default class App extends Component {
                             <Route path = "/log-reg/test" exact 
                             component = { LogRegTest }
                             />{" "}
+                        
                             <Route path = "/svm" exact
                             component = { SVMAbout }
                             />{" "}
@@ -61,6 +63,7 @@ export default class App extends Component {
                             <Route path = "/svm/test" exact 
                             component = { SVMTest }
                             />{" "}
+                        
                             <Route path = "/nb" exact
                             component = { NBAbout }
                             />{" "}
@@ -70,12 +73,14 @@ export default class App extends Component {
                             <Route path = "/nb/test" exact 
                             component = { NBTest }
                             />{" "}
+                      
                             <Route path = "/k-means" exact
                             component = { KMeansAbout }
                             />{" "}
                             <Route path = "/k-means/train" exact 
                             component = { KMeansTrain }
                             />{" "}
+                       
                         </Switch>{" "}
                     </div>{" "} 
                 </React.Fragment>{" "} 
