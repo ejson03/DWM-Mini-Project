@@ -14,7 +14,7 @@ import { NBTrain } from './component/nB/Train';
 import { NBTest } from './component/nB/Test';
 import { KMeansAbout } from './component/kMeans/About';
 import { KMeansTrain } from './component/kMeans/Train';
-import ViewCSV from './container/viewCSV/ViewCSV';
+import {ViewCSV} from './component/viewCSV/ViewCSV';
 import { NavBar } from './component/navBar/NavBar';
 import HomePage from './component/home/HomePage';
 import history from './component/history/History';

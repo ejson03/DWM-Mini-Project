@@ -1,16 +1,13 @@
 import React, { Component } from "react";
-import TabBar from "../tabBar/TabBar";
-import AnalyticContatiner from "../analyticContainer/AnalyticContainer";
-import FileCard from "../../component/fileCard/FileCard";
-import Scroll from "../scroll/Scroll";
+import TabBar from "../../container/tabBar/TabBar";
+import AnalyticContatiner from "../../container/analyticContainer/AnalyticContainer";
 import matchSorter from "match-sorter";
-import FilterBar from "../filterBar/FilterBar";
-import { PROXY_URL } from '../../component/misc/ProxyURL';
+import { PROXY_URL } from '../misc/ProxyURL';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './ViewCSV.css';
 import "tachyons";
 
-class ViewCSV extends Component {
+export class ViewCSV extends Component {
     constructor() {
         super();
         this.state = {
@@ -19,7 +16,8 @@ class ViewCSV extends Component {
             columns: [],
             data: [],
             visibleColumns: [],
-            searchMethod: "regex"
+            searchMethod: "regex",
+            chart: "Bar"
         };
     }
 
@@ -28,6 +26,12 @@ class ViewCSV extends Component {
             this.setState({ activeTab: route });
         }
     };
+
+    changeChart = route => {
+        if(route !== this.state.chart){
+            this.setState({chart: route})
+        }
+    }
 
     uploadFile = () => {
         const input = document.getElementById("FileUpload");
@@ -41,7 +45,10 @@ class ViewCSV extends Component {
                 headers: myHeaders,
                 body: JSON.stringify({ data: data })
             }).then(res => {
-                res.json().then(data => this.createTable(data));
+                res.json().then(data => {
+                    console.log(data.columns)
+                    this.createTable(data)
+                });
             });
         };
         reader.readAsText(input.files[0]);
@@ -190,40 +197,29 @@ class ViewCSV extends Component {
                     style={{ zIndex: 1 }}
                 />
                 <br />
-                {this.state.openFile !== "" ? (
-                    <Scroll className="absolute pa5 row pagination-centered">
-                        <AnalyticContatiner
-                            activeTab={this.state.activeTab}
-                            data={this.state.data}
-                            columns={this.state.columns.filter(col => {
-                                return this.state.visibleColumns.includes(
-                                    col.Header
-                                );
-                            })}
-                            style={{ zIndex: -1 }}
-                            defaultFilterMethod={this.defaultFilterMethod(
-                                this.state.searchMethod
-                            )}
-                        />
-                    </Scroll>
-                ) : (
-                    <div className="center pa7 db row">
-                        <FileCard onSubmit={this.uploadFile}/>
-                    </div>
-                )}
-                <br /><br /><br />
-                <div className="w-100 row">
-                    <FilterBar
-                        visibleColumns={this.state.visbleColumns}
-                        columns={this.state.columns}
-                        updateColumns={this.updateColumns}
-                        updateSearchMethod={this.updateSearchMethod}
-                        selectedValue={this.state.searchMethod}
-                    />
-                </div>
+                <AnalyticContatiner
+                    activeTab={this.state.activeTab}
+                    data={this.state.data}
+                    openFile={this.state.openFile}
+                    columns={this.state.columns.filter(col => {
+                        return this.state.visibleColumns.includes(
+                            col.Header
+                        );
+                    })}
+                    visibleColumns={this.state.visibleColumns}
+                    style={{ zIndex: -1 }}
+                    defaultFilterMethod={this.defaultFilterMethod(
+                        this.state.searchMethod
+                    )}
+                    updateColumns={this.updateColumns}
+                    updateSearchMethod={this.updateSearchMethod}
+                    searchMethod={this.state.searchMethod}
+                    uploadFile={this.uploadFile}
+                    chart={this.state.chart}
+                    changeChart={this.changeChart}
+                />
             </div>
         );
     }
 }
 
-export default ViewCSV;

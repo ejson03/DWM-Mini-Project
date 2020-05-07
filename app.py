@@ -9,7 +9,7 @@ from flask_cors import CORS
 from io import StringIO
 from modules.utils import formatFrame
 from modules.session import Session
-from modules.charts import charts
+from modules.chart import getChart
 import os.path
 import json
 import os
@@ -52,9 +52,8 @@ def upload(upload_name):
 @app.route('/dataset', methods=["POST"])
 def createFrame():
     state = {}
-    #data = StringIO(request.json["data"], '\r')
-    path = sess.get(f'{train_name}_path')
-    state["frame"] = pd.read_csv(path, engine="python")
+    data = StringIO(request.json["data"], '\r')
+    state["frame"] = pd.read_csv(data, engine="python")
     return jsonify(formatFrame(state))
 
 @app.route('/train/<string:train_name>', methods=['POST'])
@@ -82,13 +81,11 @@ def testroute(test_name):
     test = algo.test()
     return jsonify(test)
 
-@app.route('/visualize/<string:chart>', methods=['GET'])
-def visualize(chart):
-    row = request.get_json()
-    path = sess.get(f'{train_name}_path')
-    ext = sess.get(f'{train_name}_ext') 
-    chart = getChart(row, ext, path)
-
+@app.route('/visualization', methods=['POST'])
+def visualize():
+    data = request.get_json()
+    data = getChart(data)
+    return data
 
 
 if __name__ == "__main__":

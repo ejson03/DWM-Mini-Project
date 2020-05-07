@@ -17,7 +17,7 @@ const FileCard = props => {
                 <div className="card-image">
                     <br />
                     <h1>
-                        Select a dataset (.csv) to open it!
+                        Upload CSV
                     </h1>
                     <br />
                 </div>
