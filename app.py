@@ -12,9 +12,17 @@ import os.path
 import json
 import os
 import pandas as pd
+import sys
+base_dir = '.'
+if hasattr(sys, '_MEIPASS'):
+    base_dir = os.path.join(sys._MEIPASS)
+    print(base_dir)
 
 sess = Session()
-app = Flask(__name__, static_folder = "./frontend/static", template_folder="./frontend")
+app = Flask(    __name__, 
+            static_folder=os.path.join(base_dir, 'frontend', 'static'),
+            template_folder=os.path.join(base_dir, 'frontend')
+        )
 if not os.path.exists("uploads"):
     os.makedirs("uploads")
 
@@ -91,4 +99,4 @@ def testroute(test_name):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)

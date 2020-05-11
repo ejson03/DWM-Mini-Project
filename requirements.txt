@@ -11,3 +11,5 @@ pyyaml
 click
 six
 Werkzeug
+https://github.com/pyinstaller/pyinstaller/archive/develop.zip
+pywin32
